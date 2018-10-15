@@ -1,0 +1,20 @@
+{
+  "name": "chitter-api-frontend",
+  "version": "1.0.0",
+  "description": "Twitter clone",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  },
+  "scripts": {
+    "test": "open SpecRunner.html"
+  },
+  "author": "Marcus Kerr",
+  "license": "ISC"
+}
