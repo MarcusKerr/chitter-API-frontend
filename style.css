@@ -1,0 +1,15 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #ffb347;
+}
+
+#peep-list {
+  background-color: #fff;
+}
+
+.peep-container {
+  border-top: 1px solid #D0D0D0;
+  border-bottom: 1px solid ##D0D0D0	;
+}
