@@ -1,7 +1,15 @@
 (function (exports) {
-  function PeepsController () {
+  function PeepsController (peepsList = PeepsList, peepsListView = PeepsListView) {
+    this.peepsListView = new peepsListView (new peepsList());
+    this.app = document.getElementById('app');
+  };
 
-  }
+  PeepsController.prototype.renderPeepsList = function () {
+    this.peepsListView.create()
+    .then(htmlArr => {
+     this.app.innerHTML = htmlArr;
+    });
+  };
 
   exports.PeepsController = PeepsController;
 })(this);
