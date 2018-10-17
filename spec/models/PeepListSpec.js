@@ -8,5 +8,4 @@ describe("PeepList", function () {
   it('returns the peep list', function () {
     expect(peepsList.getPeeps()).toEqual([])
   });
-  
 });
