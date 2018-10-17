@@ -1,11 +1,12 @@
-describe("PeepList", function() {
+describe("PeepList", function () {
   var peepList; 
 
-  beforeEach(function() {
+  beforeEach(function () {
     peepsList = new PeepsList();
   });
 
   it('returns the peep list', function () {
     expect(peepsList.getPeeps()).toEqual([])
-  })
+  });
+  
 });
