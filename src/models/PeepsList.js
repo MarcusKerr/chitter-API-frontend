@@ -1,21 +1,13 @@
 (function (exports) {
 
 function PeepsList () {
-  this._peeps_array = []
 }
 
 PeepsList.prototype.getPeeps = function () {
-  //add them to the array
-  // return the array
-  fetch('https://chitter-backend-api.herokuapp.com/peeps')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {
-    console.log(JSON.stringify(myJson));
-  });
+  return fetch('https://chitter-backend-api.herokuapp.com/peeps')
+  .then(response => response.json())
+  .catch(error => console.error('Error:', error));
 }
 
-  exports.PeepsList = PeepsList;
-
+exports.PeepsList = PeepsList;
 })(this);
