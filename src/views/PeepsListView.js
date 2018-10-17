@@ -7,14 +7,13 @@
 
   PeepsListView.prototype.create = function () {
     this._peepsList_html = [];
-    var peepHtml = this._peepsList.getPeeps()
+    return this._peepsList.getPeeps()
     .then(peepJson => {
       peepJson.forEach((peep) => {
         this._peepsList_html.push(this._formatPeep(peep));
       });
       return `<div id="peep-list" class="col-md-6 mx-auto">${this._peepsList_html.join('')}<div>`;
     });
-    return peepHtml;
   };
 
   PeepsListView.prototype._formatPeep = function (peep) {

@@ -6,8 +6,8 @@
 
   PeepsController.prototype.renderPeepsList = function () {
     this.peepsListView.create()
-    .then(htmlArr => {
-     this.app.innerHTML = htmlArr;
+    .then(peepHtmlArr => {
+     this.app.innerHTML = peepHtmlArr;
     });
   };
 
@@ -15,4 +15,11 @@
 })(this);
 
 var peepsController = new PeepsController();
+
+window.onload = loadPeeps();
+
+function loadPeeps() {
+  peepsController.renderPeepsList();
+}
+
 
