@@ -19,19 +19,21 @@
   PeepsListView.prototype._formatPeep = function (peep) {
     // data-toggle="modal" data-target="#exampleModal"
     return `<li class="peep-list-item" id="${peep.id}">
-              <div class="peep-container container pt-2 pb-2">
-                <div class="peep-hearder">
-                  <strong class="handle mr-1">@${peep.user.handle}</strong>
-                  <span class="divider mr-1">.</span>
-                  <small class="time">${peep.updated_at}</small>
+              <a href="${peep.user.handle}/${peep.id}">
+                <div class="peep-container container pt-2 pb-2">
+                  <div class="peep-hearder">
+                    <strong class="handle mr-1">@${peep.user.handle}</strong>
+                    <span class="divider mr-1">.</span>
+                    <small class="time">${peep.updated_at}</small>
+                  </div>
+                  <div class="peep-body">
+                    <p class="peep-text">${peep.body}</p>
+                  </div>
+                  <div class="peep-footer">
+                    <span class="likes">${peep.likes.length}</span>
+                  </div>
                 </div>
-                <div class="peep-body">
-                  <p class="peep-text">${peep.body}</p>
-                </div>
-                <div class="peep-footer">
-                  <span class="likes">${peep.likes.length}</span>
-                </div>
-              </div>
+              </a>
             </li>`
   };
 

@@ -15,7 +15,13 @@
   };
 
   PeepsController.prototype.renderSinglePeep = function (peepId) {
-    return new this.singlePeepView(this.peepsList.getPeeps().then(res => {return res[peepId]}));
+    return new this.singlePeepView(this.peepsList.getPeeps()
+      .then(res => { 
+        return (res.find(peep => {
+          return peep.id === peepId
+        }));
+      })
+    ).create();
   }
 
   exports.PeepsController = PeepsController;
@@ -28,9 +34,9 @@ function addClickEventToEachPeep () {
   for (var i = 0; i < peepListItems.length; i++) {
     peepListItems[i].addEventListener('click', showPeepId)
   }
-}
+};
 
 function showPeepId (e) {
-  console.log(e.target.closest('li').id);
-}
+  console.log(peepsController.renderSinglePeep(parseInt(e.target.closest('li').id)));
+};
 
