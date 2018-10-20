@@ -19,7 +19,7 @@
   PeepsListView.prototype._formatPeep = function (peep) {
     // data-toggle="modal" data-target="#exampleModal"
     return `<li class="peep-list-item" id="${peep.id}">
-              <a href="${peep.user.handle}/${peep.id}">
+              <a href="#peeps/${peep.id}">
                 <div class="peep-container container pt-2 pb-2">
                   <div class="peep-hearder">
                     <strong class="handle mr-1">@${peep.user.handle}</strong>
