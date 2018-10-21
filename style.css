@@ -5,13 +5,25 @@ body {
   background-color: #ffb347;
 }
 
+/* Peeplist */
+
 #peep-list {
   background-color: #fff;
   list-style: none;
 }
 
-.peep-container {
+.peep-list-item {
   border-top: 1px solid #D0D0D0;
   border-bottom: 1px solid #D0D0D0	;
-  /* cursor: pointer; */
+}
+
+/* Single peep modal */
+.modal-content {
+  border-radius: 10px;
+  margin-top: 10%;
+}
+
+.modal-footer {
+
+
 }

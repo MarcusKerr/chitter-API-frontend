@@ -4,6 +4,7 @@
     this.peepsListView = new peepsListView (this.peepsList);
     this.singlePeepView = singlePeepView;
     this.app = document.getElementById('app');
+    this.modal = document.getElementById('modal');
     this.renderPeepsList();
   };
 
@@ -15,26 +16,28 @@
   };
 
   PeepsController.prototype.renderSinglePeep = function (peepId) {
-    return new this.singlePeepView(this.peepsList.getPeeps()
+      this.peepsList.getPeeps()
       .then(res => { 
         return (res.find(peep => {
-          return peep.id === peepId
+          return peep.id === peepId;
         }));
       })
-    ).create();
-  }
+      .then(peep => {
+        return new this.singlePeepView(peep).create();
+      })
+      .then(singlePeepHtml => {
+        this.modal.innerHTML = singlePeepHtml;
+        return document.getElementById('peepModal');
+      })
+      .then(peepModal => {
+        $(peepModal).modal('show');
+      })
+  };
 
   exports.PeepsController = PeepsController;
 })(this);
 
 var peepsController = new PeepsController();
-// var peepListItems = document.getElementsByClassName('peep-list-item');
-
-// function addClickEventToEachPeep () {
-//   for (var i = 0; i < peepListItems.length; i++) {
-//     peepListItems[i].addEventListener('click', showPeepId)
-//   }
-// };
 
 showPeepOnChangeUrl();
 
@@ -51,15 +54,11 @@ function getPeepFromUrl(location) {
 };
 
 function showSinglePeep(peepId) {
-  var peepModal = document.getElementById('exampleModal');
-  if (peepModal === null ) {
-    document.getElementById('app').innerHTML += peepsController.renderSinglePeep(peepId);
-  } else {
-    peepModal.innerHTML = peepsController.renderSinglePeep(peepId);
-  }
+  // var peepModal = document.getElementById('peepModal');
+  // if (peepModal === null ) {
+  //   document.getElementById('app').innerHTML += peepsController.renderSinglePeep(peepId);
+  // } else {
+  //   peepModal.innerHTML = peepsController.renderSinglePeep(peepId);
+  // }
+  peepsController.renderSinglePeep(parseInt(peepId));
 };
-
-// function showPeepId (e) {
-//   console.log(peepsController.renderSinglePeep(parseInt(e.target.closest('li').id)));
-// };
-
