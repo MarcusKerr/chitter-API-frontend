@@ -29,7 +29,10 @@
                     <p class="peep-text">${peep.body}</p>
                   </div>
                   <div class="peep-footer">
-                    <span class="likes">${peep.likes.length}</span>
+                    <div class="likes-container">
+                      <i class="far fa-heart heart"></i>
+                      <span class="likes">${peep.likes.length}</span>
+                    </div>
                   </div>
                 </div>
               </a>

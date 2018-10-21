@@ -11,13 +11,16 @@
                   <div class="modal-header">
                     <h5 class="modal-title" id="peepModalTitle">@${this._peep.user.handle}</h5>
                   </div>
-                  <div class="modal-body">${this._peep.body}</div>
-                  <div class="modal-footer" id="modal-footer">
+                  <div class="modal-body">
+                    <h3 class="peep-text">${this._peep.body}</h3>
+                  </div>
+                  <div class="modal-footer">
                     <div class="time-and-date-container">
                       <span>${this._peep.updated_at}</span>
                     </div>
                     <div class="likes-container">
-                      <span class="likes">${this._peep.likes.length} Likes</span>
+                      <i class="far fa-heart heart"></i>
+                      <span class="likes">${this._peep.likes.length}</span>
                     </div>
                   </div>
                 </div>
