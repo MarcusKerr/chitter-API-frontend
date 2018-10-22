@@ -14,7 +14,7 @@
     "jasmine": "^3.2.0"
   },
   "scripts": {
-    "test": "open SpecRunner.html"
+    "test": "jasmine"
   },
   "author": "Marcus Kerr",
   "license": "ISC"
