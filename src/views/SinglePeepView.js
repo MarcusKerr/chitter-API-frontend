@@ -48,9 +48,8 @@
   }
 
   SinglePeepView.prototype._formatDate = function (peepDateTime) {
-    var peepDate = peepDateTime.toDateString().slice(4);
-    var dateArray = peepDate.split(" ");
-    return ([dateArray[1], dateArray[0], dateArray[2]].join(" "));
+    var peepDateArray = peepDateTime.toDateString().split(" ").slice(1);
+    return ([peepDateArray[1], peepDateArray[0], peepDateArray[2]].join(" "));
   }
 
   exports.SinglePeepView = SinglePeepView;
