@@ -4,8 +4,8 @@
     this._peep = peep ;
   }
 
-  SinglePeepView.prototype.create = function () {
-    return `<div class="modal fade" id="peepModal" tabindex="-1" role="dialog">
+  SinglePeepView.prototype.create = function (peepModal) {
+    var singlePeepHtml = `
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -24,8 +24,12 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>`;
+              </div>`;
+    if (peepModal) {
+      return singlePeepHtml;
+    } else {
+      return `<div class="modal fade" id="peepModal" tabindex="-1" role="dialog">${singlePeepHtml}</div>`;
+    }
   }
 
   SinglePeepView.prototype._formatDateTime = function (dateTime) {

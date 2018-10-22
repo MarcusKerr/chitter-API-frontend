@@ -4,7 +4,6 @@
     this.peepsListView = new peepsListView (this.peepsList);
     this.singlePeepView = singlePeepView;
     this.app = document.getElementById('app');
-    this.modal = document.getElementById('modal');
     this.renderPeepsList();
   };
 
@@ -15,7 +14,7 @@
     });
   };
 
-  PeepsController.prototype.renderSinglePeep = function (peepId) {
+  PeepsController.prototype.renderSinglePeep = function (peepId, peepModal) {
       this.peepsList.getPeeps()
       .then(res => { 
         return (res.find(peep => {
@@ -23,10 +22,14 @@
         }));
       })
       .then(peep => {
-        return new this.singlePeepView(peep).create();
+        return new this.singlePeepView(peep).create(peepModal);
       })
       .then(singlePeepHtml => {
-        this.modal.innerHTML = singlePeepHtml;
+        if (peepModal) {
+          peepModal.innerHTML = singlePeepHtml;
+        } else {
+          this.app.innerHTML += singlePeepHtml;
+        }
         return document.getElementById('peepModal');
       })
       .then(peepModal => {
@@ -54,11 +57,6 @@ function getPeepFromUrl(location) {
 };
 
 function showSinglePeep(peepId) {
-  // var peepModal = document.getElementById('peepModal');
-  // if (peepModal === null ) {
-  //   document.getElementById('app').innerHTML += peepsController.renderSinglePeep(peepId);
-  // } else {
-  //   peepModal.innerHTML = peepsController.renderSinglePeep(peepId);
-  // }
-  peepsController.renderSinglePeep(parseInt(peepId));
+  var peepModal = document.getElementById('peepModal');
+  peepsController.renderSinglePeep(parseInt(peepId), peepModal);
 };
