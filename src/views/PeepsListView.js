@@ -23,7 +23,7 @@
                   <div class="peep-hearder">
                     <strong class="handle mr-1">@${peep.user.handle}</strong>
                     <span class="divider mr-1">.</span>
-                    <small class="time">${peep.updated_at}</small>
+                    <small class="time">${this._formatDate(peep.created_at)}</small>
                   </div>
                   <div class="peep-body">
                     <p class="peep-text">${peep.body}</p>
@@ -37,6 +37,18 @@
                 </div>
               </a>
             </li>`
+  };
+
+  PeepsListView.prototype._formatDate = function (dateTime) {
+    var today = new Date();
+    var peepDate = new Date(dateTime);
+    if (peepDate.getYear() === today.getYear()) {
+      return peepDate.toDateString().slice(4,10);
+    } else {
+      var dateArray = peepDate.toDateString().split(" ");
+      dateArray.shift();
+      return ([dateArray[1], dateArray[0], dateArray[2]].join(" "));
+    }
   };
 
   exports.PeepsListView = PeepsListView;
