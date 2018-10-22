@@ -36,11 +36,11 @@
   SinglePeepView.prototype._formatTime = function (peepDateTime) {
     var hours = peepDateTime.getHours();
     var mins = peepDateTime.getMinutes();
-    if ( mins < 10 ) {
+    if (mins < 10) {
       mins = "0" + mins;
     }
     var ampm = "AM";
-    if ( hours > 12 ) {
+    if (hours > 12) {
       hours -= 12;
       ampm = "PM";
     }
