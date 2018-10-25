@@ -34,7 +34,7 @@
       })
       .then(peepModal => {
         $(peepModal).modal('show');
-      })
+      });
   };
 
   exports.PeepsController = PeepsController;

@@ -12,7 +12,7 @@
       peepJson.forEach((peep) => {
         this._peepsList_html.push(this._formatPeep(peep));
       });
-      return `<ol id="peep-list" class="col-md-6 mx-auto">${this._peepsList_html.join('')}<ol>`;
+      return `<ol id="peep-list" class="col-md-6 col-lg-4 mx-auto">${this._peepsList_html.join('')}<ol>`;
     });
   };
 

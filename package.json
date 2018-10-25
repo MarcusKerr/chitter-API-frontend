@@ -16,6 +16,6 @@
   "scripts": {
     "test": "jasmine"
   },
-  "author": "Marcus Kerr",
+  "author": "Marcus A. Kerr",
   "license": "ISC"
 }
