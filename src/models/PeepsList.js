@@ -1,12 +1,11 @@
 (function (exports) {
 
-function PeepsList () {
+function PeepsList (client) {
+  this.client = client;
 }
 
-PeepsList.prototype.getPeeps = function () {
-  return fetch('https://chitter-backend-api.herokuapp.com/peeps')
-  .then(response => response.json())
-  .catch(error => console.error('Error:', error));
+PeepsList.prototype.getPeeps = function (path = '/peeps') {
+  return this.client.connect(path);
 }
 
 exports.PeepsList = PeepsList;
