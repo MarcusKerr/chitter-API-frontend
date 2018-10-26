@@ -18,5 +18,3 @@ describe('Client', function() {
   });
 
 });
-
-

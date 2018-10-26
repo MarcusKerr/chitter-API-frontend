@@ -3,5 +3,9 @@
 
   }
 
+  Client.prototype.connect = function(url) {
+    
+  }
+
   exports.Client = Client;
 })(this);
