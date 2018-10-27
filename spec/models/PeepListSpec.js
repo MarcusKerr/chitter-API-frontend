@@ -1,17 +1,20 @@
-// 'use strict';
-// describe("PeepList", function() {
-//   var  PeepsList = require('../../src/models/PeepsList').PeepsList;
-//   var peepsList;
+'use strict';
+describe("PeepList", function() {
+  var PeepsList = require('../../src/models/PeepsList').PeepsList;
+  var promisedData = require('../helpers/peepsPromisedData.json');
+  var peepsList;
+  var client;
 
-//   beforeEach(function() {
-//     peepsList = new PeepsList();
-//   });
+  beforeEach(function() {
+    client = jasmine.createSpyObj('client', ['connect']);
+    peepsList = new PeepsList(client);
+  });
 
-//   describe('.getPeeps', function () {
-//     it('fetches from the chitter API', function() {
-//       spyOn(global, 'fetch').and.callTrough();
-//       peepsList.getPeeps();
-//       expect(global.fetch).toHaveBeenCalledWith('X');
-//     });
-//   });
-// });
+  describe('.getPeeps', function () {
+    it('delegates fetching of peeps to the client', function() {
+      peepsList.getPeeps('/path')
+      expect(client.connect).toHaveBeenCalledWith('/path');
+    });
+  });
+
+});
