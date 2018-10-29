@@ -7,7 +7,9 @@ describe("PeepList", function() {
 
   beforeEach(function() {
     client = jasmine.createSpyObj('client', ['connect']);
-    // client.object.and.returnValue('x');
+    client.connect.and.callFake(function() {
+      return Promise.resolve(promisedData);
+    });
     peepsList = new PeepsList(client);
   });
 
@@ -18,7 +20,10 @@ describe("PeepList", function() {
     });
 
     it('returns peep data', function () {
-  
+      peepsList.getPeeps()
+        .then(function(result) {
+          expect(result).toEqual('promisedData');
+        });
     });
   });
 });

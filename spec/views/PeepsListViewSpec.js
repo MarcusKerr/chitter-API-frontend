@@ -21,7 +21,6 @@ describe("PeepsListView", function() {
         });
     });
 
-
     it("return html string containing peep data", function() {
       peepsListView.create()
         .then(function(result) {
