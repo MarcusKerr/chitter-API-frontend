@@ -2,18 +2,18 @@
 
   function PeepsListView(peepsList) {
     this._peepsList = peepsList;
-    this._peepsList_html = [];
+    this._peepsListHtml = [];
   };
 
   PeepsListView.prototype.create = function () {
-    this._peepsList_html = [];
+    this._peepsListHtml = [];
     return this._peepsList.getPeeps()
-    .then(peepJson => {
-      peepJson.forEach((peep) => {
-        this._peepsList_html.push(this._formatPeep(peep));
+      .then(peepJson => {
+        peepJson.forEach((peep) => {
+          this._peepsListHtml.push(this._formatPeep(peep));
+        });
+        return `<ol id="peep-list" class="col-md-6 col-lg-4 mx-auto">${this._peepsListHtml.join('')}</ol>`;
       });
-      return `<ol id="peep-list" class="col-md-6 col-lg-4 mx-auto">${this._peepsList_html.join('')}<ol>`;
-    });
   };
 
   PeepsListView.prototype._formatPeep = function (peep) {
@@ -36,7 +36,7 @@
                   </div>
                 </div>
               </a>
-            </li>`
+            </li>`;
   };
 
   PeepsListView.prototype._formatDate = function (dateTime) {
