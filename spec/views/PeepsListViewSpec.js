@@ -5,14 +5,24 @@ describe("PeepsListView", function() {
   var peepsListView;
   var peepsList;
 
+  beforeEach(function() {
+    peepsList = jasmine.createSpyObj('peepsList', ['getPeeps']);
+    peepsList.getPeeps.and.callFake(function() {
+      return Promise.resolve(promisedData); 
+    });
+    peepsListView = new PeepsListView(peepsList);
+  });
 
   describe(".create", function() {
+    it("delegates collection of peep data to peepslist", function() {
+      peepsListView.create()
+        .then(function(result) {
+          expect(peepsList.getPeeps).toHaveBeenCalled();
+        });
+    });
+
+
     it("return html string containing peep data", function() {
-      peepsList = jasmine.createSpyObj('peepsList', ['getPeeps']);
-      peepsList.getPeeps.and.callFake(function() {
-        return Promise.resolve(promisedData); 
-      });
-      peepsListView = new PeepsListView(peepsList);
       peepsListView.create()
         .then(function(result) {
           expect(result).toEqual(`<ol id="peep-list" class="col-md-6 col-lg-4 mx-auto"><li class="peep-list-item" id="${ promisedData[0].id}">
@@ -39,4 +49,3 @@ describe("PeepsListView", function() {
     });
   });
 });
-
