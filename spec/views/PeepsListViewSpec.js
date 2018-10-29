@@ -1,7 +1,6 @@
 'use strict';
 describe("PeepsListView", function() {
   var PeepsListView = require('../../src/views/PeepsListView').PeepsListView;
-  var PeepsList = require('../../src/models/PeepsList').PeepsList;
   var promisedData = require('../helpers/peepsPromisedData.json');
   var peepsListView;
   var peepsList;
@@ -9,9 +8,11 @@ describe("PeepsListView", function() {
 
   describe(".create", function() {
     it("return html string containing peep data", function() {
-      peepsList = new PeepsList();
+      peepsList = jasmine.createSpyObj('peepsList', ['getPeeps']);
+      peepsList.getPeeps.and.callFake(function() {
+        return Promise.resolve(promisedData); 
+      });
       peepsListView = new PeepsListView(peepsList);
-      spyOn(peepsList, 'getPeeps').and.returnValue(Promise.resolve(promisedData));
       peepsListView.create()
         .then(function(result) {
           expect(result).toEqual(`<ol id="peep-list" class="col-md-6 col-lg-4 mx-auto"><li class="peep-list-item" id="${ promisedData[0].id}">
@@ -38,3 +39,4 @@ describe("PeepsListView", function() {
     });
   });
 });
+
