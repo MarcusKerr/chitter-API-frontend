@@ -22,7 +22,7 @@ describe("PeepList", function() {
     it('returns peep data', function () {
       peepsList.getPeeps()
         .then(function(result) {
-          expect(result).toEqual('promisedData');
+          expect(result).toEqual(promisedData);
         });
     });
   });
