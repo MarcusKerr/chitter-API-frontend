@@ -26,7 +26,6 @@ body {
   text-align: center;
   padding-top: 40%;
   padding-bottom: 0;
-
 }
 
 #button-container {
@@ -38,13 +37,44 @@ body {
   width: 400px;
   height: 30px;
   border-radius: 15px;
-  border: 2px solid tomato;
+  border: 1px solid tomato;
   color: tomato;
   padding: 0;
 }
 
 #sign-up-btn {
   margin-top: 15px;
+  color: #fff;
+  background-color: tomato;
+}
+
+/* Sign Up*/
+
+#sign-up-container {
+  background-color: #fff;
+  margin-top: 5%;
+}
+
+#sign-up-wrapper {
+  margin-left: 115px; 
+  margin-right: 115px;
+  padding-bottom: 15px;
+}
+
+#sign-up-wrapper > h3 {
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+
+.sign-up-input > input{
+  width: 280px;
+  margin-bottom: 15px;
+}
+
+#confirm-sign-up-btn {
+  margin-top: 15px;
+  width: 75px;
+  height: 34px;
   color: #fff;
   background-color: tomato;
 }

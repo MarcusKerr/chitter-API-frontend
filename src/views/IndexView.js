@@ -1,6 +1,5 @@
 (function(exports) {
   function IndexView () {
-
   }
 
   IndexView.prototype.create = function() {
