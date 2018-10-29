@@ -1,5 +1,5 @@
 (function (exports) {
-  function PeepsController (client = Client, peepsList = PeepsList, peepsListView = PeepsListView, singlePeepView = SinglePeepView) {
+  function PeepController (client = Client, peepsList = PeepsList, peepsListView = PeepsListView, singlePeepView = SinglePeepView) {
     this.client = new client();
     this.peepsList = new peepsList(this.client);
     this.peepsListView = new peepsListView (this.peepsList);
@@ -8,14 +8,14 @@
     this.renderPeepsList();
   };
 
-  PeepsController.prototype.renderPeepsList = function () {
+  PeepController.prototype.renderPeepsList = function () {
     this.peepsListView.create()
     .then(peepsHtml => {
      this.app.innerHTML += peepsHtml;
     });
   };
 
-  PeepsController.prototype.renderSinglePeep = function (peepId, peepModal) {
+  PeepController.prototype.renderSinglePeep = function (peepId, peepModal) {
       this.peepsList.getPeeps()
       .then(res => { 
         return (res.find(peep => {
@@ -38,10 +38,10 @@
       });
   };
 
-  exports.PeepsController = PeepsController;
+  exports.PeepController = PeepController;
 })(this);
 
-var peepsController = new PeepsController();
+var peepController = new PeepController();
 
 showPeepOnChangeUrl();
 
@@ -59,5 +59,5 @@ function getPeepFromUrl(location) {
 
 function showSinglePeep(peepId) {
   var peepModal = document.getElementById('peepModal');
-  peepsController.renderSinglePeep(parseInt(peepId), peepModal);
+  peepController.renderSinglePeep(parseInt(peepId), peepModal);
 };
