@@ -10,32 +10,32 @@
 
   PeepController.prototype.renderPeepsList = function () {
     this.peepsListView.create()
-    .then(peepsHtml => {
-     this.app.innerHTML += peepsHtml;
-    });
+      .then(peepsHtml => {
+        this.app.innerHTML += peepsHtml;
+      });
   };
 
   PeepController.prototype.renderSinglePeep = function (peepId, peepModal) {
       this.peepsList.getPeeps()
-      .then(res => { 
-        return (res.find(peep => {
-          return peep.id === peepId;
-        }));
-      })
-      .then(peep => {
-        return new this.singlePeepView(peep).create(peepModal);
-      })
-      .then(singlePeepHtml => {
-        if (peepModal) {
-          peepModal.innerHTML = singlePeepHtml;
-        } else {
-          this.app.innerHTML += singlePeepHtml;
-        }
-        return document.getElementById('peepModal');
-      })
-      .then(peepModal => {
-        $(peepModal).modal('show');
-      });
+        .then(res => { 
+          return (res.find(peep => {
+            return peep.id === peepId;
+          }));
+        })
+        .then(peep => {
+          return new this.singlePeepView(peep).create(peepModal);
+        })
+        .then(singlePeepHtml => {
+          if (peepModal) {
+            peepModal.innerHTML = singlePeepHtml;
+          } else {
+            this.app.innerHTML += singlePeepHtml;
+          }
+          return document.getElementById('peepModal');
+        })
+        .then(peepModal => {
+          $(peepModal).modal('show');
+        });
   };
 
   exports.PeepController = PeepController;
