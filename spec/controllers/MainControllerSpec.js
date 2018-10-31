@@ -5,10 +5,12 @@ describe("MainController", function() {
   var MainController = require("../../src/controllers/MainController").MainController;
   var mainController;
   var indexView;
+  var signUpView;
 
   beforeEach(function() {
     indexView = jasmine.createSpyObj('indexView', ['create']);
-    mainController = new MainController(indexView);
+    signUpView = jasmine.createSpyObj('signUpView', ['create']);
+    mainController = new MainController(indexView, signUpView);
   })
 
   describe(".renderIndex", function() {
