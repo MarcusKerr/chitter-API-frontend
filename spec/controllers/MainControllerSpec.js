@@ -4,16 +4,17 @@ describe("MainController", function() {
 
   var MainController = require("../../src/controllers/MainController").MainController;
   var mainController;
+  var indexView;
 
   beforeEach(function() {
-    indexPageView = jasmine.createSpyObj("indexPageView", ["create"]);
-    mainController = new MainController();
+    indexView = jasmine.createSpyObj('indexView', ['create']);
+    mainController = new MainController(indexView);
   })
 
   describe(".renderIndex", function() {
-    it("delegates to indexpageView", function() {
+    it("delegates to index View", function() {
       mainController.renderIndex();
-      expect(indexPageView.create).toHaveBeenCalled();
+      expect(indexView.create).toHaveBeenCalled();
     });
   });
 });
