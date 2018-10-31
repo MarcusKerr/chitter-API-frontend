@@ -17,4 +17,11 @@ describe("MainController", function() {
       expect(indexView.create).toHaveBeenCalled();
     });
   });
+
+  describe(".renderSignUp", function() {
+    it("delagates to sign up view", function() {
+      mainController.renderSignUp();
+      expect(signUpView.create).toHaveBeenCalled();
+    });
+  });
 });
