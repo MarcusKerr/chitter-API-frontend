@@ -5,7 +5,7 @@
 
   UserController.prototype.createUser = function(userData) {
     this.user.new(userData)
-  }
+  };
 
   exports.UserController = UserController;
 })(this);

@@ -1,5 +1,5 @@
 (function(exports){
-  function User (client) {
+  function User (client = new Client()) {
     this._client = client;
   }
 
