@@ -4,9 +4,7 @@
     this.app = document.getElementById('app');
   };
 
-  UserController.prototype.renderSignUpPage = function() {
-    return this.app.innerHTML = this.signUpView.create(); 
-  };
+
 
   exports.UserController = UserController;
 })(this);

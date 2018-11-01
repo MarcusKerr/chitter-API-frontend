@@ -11,10 +11,13 @@ describe("SignUpView", function() {
         <h3>Sign up to Chitter</h3>
         <form>
           <div class="sign-up-input">
-            <input type="text" placeholder="Handle">
+            <input id="handle" type="text" placeholder="Handle">
           </div>
           <div class="sign-up-input">
-            <input type="password" placeholder="Password">
+            <input id="password" type="password" placeholder="Password">
+          </div>
+          <div class="sign-up-input">
+            <input id="confirm-password" type="password" placeholder="Confirm Password">
           </div>
           <button id="confirm-sign-up-btn" class="btn">Submit</button>
         </form>
