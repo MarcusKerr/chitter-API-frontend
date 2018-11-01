@@ -1,10 +1,11 @@
 (function(exports) {
-  function UserController (signUpView = new SignUpView()) {
-    this.signUpView = signUpView;
-    this.app = document.getElementById('app');
+  function UserController (user = new User()) {
+    this.user = user;
   };
 
-
+  UserController.prototype.createUser = function(userData) {
+    this.user.new(userData)
+  }
 
   exports.UserController = UserController;
 })(this);
