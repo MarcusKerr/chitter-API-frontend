@@ -15,8 +15,8 @@ describe("PeepList", function() {
 
   describe('.getPeeps', function () {
     it('delegates fetching of peeps to the client', function() {
-      peepsList.getPeeps('/path');
-      expect(client.connect).toHaveBeenCalledWith('/path');
+      peepsList.getPeeps();
+      expect(client.connect).toHaveBeenCalled();
     });
 
     it('returns peep data', function () {

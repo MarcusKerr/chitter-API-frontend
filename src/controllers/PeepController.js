@@ -4,14 +4,12 @@
     this.peepsList = new peepsList(this.client);
     this.peepsListView = new peepsListView (this.peepsList);
     this.singlePeepView = singlePeepView;
-    this.app = document.getElementById('app');
-    this.renderPeepsList();
   };
 
   PeepController.prototype.renderPeepsList = function () {
-    this.peepsListView.create()
+    return this.peepsListView.create()
       .then(peepsHtml => {
-        this.app.innerHTML += peepsHtml;
+        return peepsHtml;
       });
   };
 

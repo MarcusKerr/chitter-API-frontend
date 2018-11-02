@@ -1,11 +1,12 @@
 (function (exports) {
 
 function PeepsList (client) {
-  this.client = client;
+  this._client = client;
+  this._path = '/peeps';
 }
 
-PeepsList.prototype.getPeeps = function (path = '/peeps') {
-  return this.client.connect(path);
+PeepsList.prototype.getPeeps = function () {
+  return this._client.connect(this._path);
 }
 
 exports.PeepsList = PeepsList;

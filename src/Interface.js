@@ -1,5 +1,7 @@
 var app = document.getElementById('app');
 var mainController = new MainController();
+var peepController;
+
 
 startApp();
 
@@ -12,9 +14,39 @@ function startApp () {
 function setButtons () {
   document.getElementById('sign-up-btn').addEventListener("click", function() {
     app.innerHTML = mainController.renderSignUp();
+    setSubmitButton();
+  });
+};
+
+function setSubmitButton () {
+  document.getElementById('confirm-sign-up-btn').addEventListener("click", function(e) {
+    e.preventDefault();
+    getUserData();
+  });
+};
+
+function getUserData() {
+  var handle = document.getElementById('handle').value;
+  var password = document.getElementById('password').value;
+
+
+  var userData = {  "user": {
+                      "handle": handle.toString(),
+                      "password": password.toString()
+                    }
+                  }
+
+  console.log(userData);
+  displayPeepsList();
+};
+
+function displayPeepsList() {
+  peepController = new PeepController();
+  peepController.renderPeepsList()
+  .then(response => {
+    app.innerHTML = response
   });
 }
-
 
 // var peepController = new PeepController();
 
