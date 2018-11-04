@@ -1,13 +1,13 @@
 'use strict';
 describe("UserController", function() {
-  var UserController = require("../../src/controllers/UserController").UserController;
+  var UsersController = require("../../src/controllers/UsersController").UsersController;
   var userData = require('../helpers/userData.json');
   var userController;
   var user;
 
   beforeEach(function() {
     user = jasmine.createSpyObj("user", ['new'])
-    userController = new UserController(user);
+    userController = new UsersController(user);
   })
 
   describe(".createUser", function() {

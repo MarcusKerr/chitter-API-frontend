@@ -1,11 +1,11 @@
 (function(exports) {
-  function UserController (user = new User()) {
+  function UsersController (user = new User()) {
     this.user = user;
   };
 
   UserController.prototype.createUser = function(userData) {
-    this.user.new(userData)
+    this.user.new(userData);
   };
 
-  exports.UserController = UserController;
+  exports.UsersController = UsersController;
 })(this);

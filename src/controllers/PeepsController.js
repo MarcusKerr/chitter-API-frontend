@@ -1,19 +1,19 @@
 (function (exports) {
-  function PeepController (client = Client, peepsList = PeepsList, peepsListView = PeepsListView, singlePeepView = SinglePeepView) {
-    this.client = new client();
+  function PeepsController (client = new Client(), peepsList = PeepsList, peepsListView = PeepsListView, singlePeepView = SinglePeepView) {
+    this.client = client;
     this.peepsList = new peepsList(this.client);
-    this.peepsListView = new peepsListView (this.peepsList);
+    this.peepsListView = new peepsListView(this.peepsList);
     this.singlePeepView = singlePeepView;
   };
 
-  PeepController.prototype.renderPeepsList = function () {
+  PeepsController.prototype.renderPeepsList = function () {
     return this.peepsListView.create()
       .then(peepsHtml => {
         return peepsHtml;
       });
   };
 
-  PeepController.prototype.renderSinglePeep = function (peepId, peepModal) {
+  PeepsController.prototype.renderSinglePeep = function (peepId, peepModal) {
       this.peepsList.getPeeps()
         .then(res => { 
           return (res.find(peep => {
@@ -36,5 +36,5 @@
         });
   };
 
-  exports.PeepController = PeepController;
+  exports.PeepsController = PeepsController;
 })(this);
