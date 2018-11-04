@@ -41,7 +41,7 @@ function getUserData() {
 };
 
 function displayPeepsList() {
-  peepController = new PeepController();
+  peepController = new PeepsController();
   peepController.renderPeepsList()
   .then(response => {
     app.innerHTML = response

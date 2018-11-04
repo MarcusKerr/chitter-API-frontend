@@ -1,26 +1,27 @@
-// 'use strict';
-// describe("PeepController", function() {
-//   var PeepController = require("../../src/controllers/PeepController").PeepController;
-//   var peepController;
-//   var client;
-//   var peepsList;
-//   var peepsListView;
-//   var singlePeepView;
+'use strict';
+describe("PeepController", function() {
+  var PeepsController = require("../../src/controllers/PeepsController").PeepsController;
+  var peepsController;
+  var client;
+  var peepsList;
+  var peepsListView;
+  var singlePeepView;
 
-//   beforeEach(function() {
-//     client = jasmine.createSpyObj('client', ['connect'])
-//     peepsList = jasmine.createSpyObj('peepsList', ['getPeeps'])
-//     peepsListView = jasmine.createSpyObj('peepsListView', ['create'])
-//     singlePeepView = jasmine.createSpyObj('singlePeepView', ['create'])
-//     peepController = new PeepController(client, peepsList, peepsListView, singlePeepView);
-//   });
+  beforeEach(function() {
+    client = jasmine.createSpyObj('client', ['connect'])
+    peepsList = jasmine.createSpyObj('peepsList', ['new', 'getPeeps'])
+    peepsListView = jasmine.createSpyObj('peepsListView', ['create'])
+    peepsListView.create.and.callFake(function() {
+      return Promise.resolve('<div></div>');
+    });
+    singlePeepView = jasmine.createSpyObj('singlePeepView', ['create'])
+    peepsController = new PeepsController(client, peepsList, peepsListView, singlePeepView);
+  });
 
-//   describe(".renderPeepList", function() {
-//     it("delegates to peepListview", function() {
-//       peepController.renderPeepList()
-//         .then(function(result) {
-//           expect(peepListView.create).toHaveBeenCalled();
-//         });
-//     });
-//   });
-// });
+  describe(".renderPeepsList", function() {
+    it("delegates to peepListview", function() {
+      peepsController.renderPeepsList()
+      expect(peepsListView.create).toHaveBeenCalled();
+    });
+  });
+});
