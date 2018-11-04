@@ -5,7 +5,15 @@
   }
 
   SinglePeepView.prototype.create = function (peepModal) {
-    var singlePeepHtml = `<div class="modal-dialog" role="document">
+    if (peepModal) {
+      return this._formatPeep();
+    } else {
+      return `<div class="modal fade" id="peepModal" tabindex="-1" role="dialog">${this._formatPeep()}</div>`;
+    }
+  }
+
+  SinglePeepView.prototype._formatPeep = function () {
+    return `<div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="peepModalTitle">@${this._peep.user.handle}</h5>
@@ -24,11 +32,6 @@
                   </div>
                 </div>
               </div>`;
-    if (peepModal) {
-      return singlePeepHtml;
-    } else {
-      return `<div class="modal fade" id="peepModal" tabindex="-1" role="dialog">${singlePeepHtml}</div>`;
-    }
   }
 
   SinglePeepView.prototype._formatDateTime = function (dateTime) {

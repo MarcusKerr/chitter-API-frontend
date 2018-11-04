@@ -19,26 +19,19 @@
           return new this.singlePeepView(peep).create(peepModal);
         })
         .then(singlePeepHtml => {
-          if (peepModal) {
-            peepModal.innerHTML = singlePeepHtml;
-          } else {
-            this.app.innerHTML += singlePeepHtml;
-          }
-          return document.getElementById('peepModal');
-        })
-        .then(peepModal => {
-          $(peepModal).modal('show');
+          console.log(singlePeepHtml);
+          return singlePeepHtml;
         });
   };
 
   PeepsController.prototype._findPeep = function (peepId) {
-    this.peepsList.getPeeps()
+    return this.peepsList.getPeeps()
         .then(res => { 
           return (res.find(peep => {
             return peep.id === peepId;
           }));
         });
-  }
+  };
 
   exports.PeepsController = PeepsController;
 })(this);
