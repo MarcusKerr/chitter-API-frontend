@@ -21,23 +21,39 @@ function setButtons () {
 function setSubmitButton () {
   document.getElementById('confirm-sign-up-btn').addEventListener("click", function(e) {
     e.preventDefault();
-    getUserData();
+    verifyFormData();
   });
 };
 
-function getUserData() {
-  var handle = document.getElementById('handle').value;
-  var password = document.getElementById('password').value;
+function verifyFormData() {
+  var handle = document.getElementById('handle').value.toString();
+  var password = document.getElementById('password').value.toString();
+  var confirmPassword = document.getElementById('confirm-password').value.toString();
+  var letters = /^[A-Za-z]+$/;
+
+  if (handle === "" || password === ""  || confirmPassword === "") {
+    alert('Please complete all fields')
+  } else if (!handle[0].match(letters)) {
+    alert('Handle must begin with a letter');
+  } else if (handle.includes(" ")) {
+    alert('Your handle cannot contain spaces');
+  } else if (password.includes(" ")) { 
+    alert('Your password cannot contain spaces');
+  } else if (password !== confirmPassword) {
+    alert('Passwords must be the same');
+  } else {
+    alert('Success!');
+  }
 
 
-  var userData = {  "user": {
-                      "handle": handle.toString(),
-                      "password": password.toString()
-                    }
-                  }
+  // var userData = {  "user": {
+  //                     "handle": handle.toString(),
+  //                     "password": password.toString()
+  //                   }
+  //                 }
 
-  console.log(userData);
-  displayPeepsList();
+  // console.log(userData);
+  // displayPeepsList();
 };
 
 function displayPeepsList() {

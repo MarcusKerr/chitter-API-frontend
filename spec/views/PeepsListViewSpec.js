@@ -16,9 +16,7 @@ describe("PeepsListView", function() {
   describe(".create", function() {
     it("delegates collection of peep data to peepslist", function() {
       peepsListView.create()
-        .then(function(result) {
-          expect(peepsList.getPeeps).toHaveBeenCalled();
-        });
+      expect(peepsList.getPeeps).toHaveBeenCalled();
     });
 
     it("return html string containing peep data", function() {

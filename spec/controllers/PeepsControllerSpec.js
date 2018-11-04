@@ -12,10 +12,12 @@ describe("PeepController", function() {
   beforeEach(function() {
     client = jasmine.createSpyObj('client', ['connect']);
     peepsList = jasmine.createSpyObj('peepsList', ['getPeeps']);
+
     peepsListView = jasmine.createSpyObj('peepsListView', ['create']);
     peepsListView.create.and.callFake(function() {
       return Promise.resolve('<div><ol><li>Peeps List</li></ol></div>');
     });
+    
     singlePeepView = jasmine.createSpyObj('singlePeepView', ['create']);
     singlePeepView.create.and.callFake(function() {
       return Promise.resolve('<div><p>Single Peep</p></div>')
