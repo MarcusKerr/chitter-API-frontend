@@ -3,7 +3,7 @@
     this.user = user;
   };
 
-  UserController.prototype.createUser = function(userData) {
+  UsersController.prototype.createUser = function(userData) {
     this.user.new(userData);
   };
 
