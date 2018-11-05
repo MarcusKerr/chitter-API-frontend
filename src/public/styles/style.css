@@ -91,6 +91,16 @@ body {
   text-align: center;
 }
 
+#errorMsgModal .modal-header > button {
+  margin-top: 0px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+#errorMsgModal .modal-header > button:focus {
+  outline: 0;
+}
+
 /* Peeplist */
 
 #peep-list {
