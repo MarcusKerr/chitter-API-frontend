@@ -26,4 +26,11 @@ describe("MainController", function() {
       expect(signUpView.create).toHaveBeenCalled();
     });
   });
+
+  describe(".renderErrorMessage", function() {
+    it("delegates to error message view", function() {
+      mainController.renderErrorMsg();
+      expect(errorMsgView.create).toHaveBeenCalledWith(errorMsg);
+    });
+  });
 });

@@ -1,7 +1,6 @@
 var app = document.getElementById('app');
 var mainController = new MainController();
-var peepController;
-
+var peepController;                   
 
 startApp();
 
@@ -32,20 +31,22 @@ function verifyFormData() {
   var letters = /^[A-Za-z]+$/;
 
   if (handle === "" || password === ""  || confirmPassword === "") {
-    alert('Please complete all fields')
+    displaySignUpError('Please complete all fields')
   } else if (!handle[0].match(letters)) {
-    alert('Handle must begin with a letter');
+    displaySignUpError('Handle must begin with a letter');
+    clearForm();
   } else if (handle.includes(" ")) {
-    alert('Your handle cannot contain spaces');
+    displaySignUpError('Your handle cannot contain spaces');
+    clearForm();
   } else if (password.includes(" ")) { 
-    alert('Your password cannot contain spaces');
+    displaySignUpError('Your password cannot contain spaces');
+    clearForm();
   } else if (password !== confirmPassword) {
-    alert('Passwords must be the same');
+    displaySignUpError('Passwords must be the same');
+    clearForm();
   } else {
-    alert('Success!');
+    createNewUser();
   }
-
-
   // var userData = {  "user": {
   //                     "handle": handle.toString(),
   //                     "password": password.toString()
@@ -56,13 +57,28 @@ function verifyFormData() {
   // displayPeepsList();
 };
 
+function displaySignUpError(errorMsg) {
+  // app.innerHTML += mainController.renderErrorMessage(errorMsg);
+  console.log(errorMsg);
+};
+
+function clearForm() {
+  document.getElementById('handle').value = "";
+  document.getElementById('password').value = "";
+  document.getElementById('confirm-password').value = "";
+};
+
+function createNewUser() {
+  console.log('new user');
+};
+
 function displayPeepsList() {
   peepController = new PeepsController();
   peepController.renderPeepsList()
   .then(response => {
     app.innerHTML = response
   });
-}
+};
 
 // var peepController = new PeepController();
 
