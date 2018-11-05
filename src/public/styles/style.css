@@ -80,6 +80,17 @@ body {
   background-color: tomato;
 }
 
+/* Sign up error messages */
+
+#errorMsgModal .modal-header {
+  padding-top: 5px;
+  padding-bottom: 0;
+}
+
+#errorMsgModal .modal-body {
+  text-align: center;
+}
+
 /* Peeplist */
 
 #peep-list {
