@@ -31,7 +31,7 @@ describe("MainController", function() {
 
   // describe(".renderErrorMessage", function() {
   //   it("delegates to error message view", function() {
-  //     mainController.renderErrorMsg();
+  //     mainController.renderErrorMessage();
   //     expect(errorMsgView.create).toHaveBeenCalledWith(errorMsg);
   //   });
   // });

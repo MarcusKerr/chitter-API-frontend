@@ -6,8 +6,8 @@ describe("ErrorMessasgeView", function() {
 
   describe("create", function() {
     it("returns HTML string for error message", function() {
-      errorMessageView = new ErrorMessageView();
-      expect(errorMessageView.create(errorMessage)).toEqual(`<div class="modal fade" id="errorMsgModal" tabindex="-1" role="dialog">
+      errorMessageView = new ErrorMessageView(errorMessage);
+      expect(errorMessageView.create()).toEqual(`<div class="modal fade" id="errorMsgModal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -23,4 +23,4 @@ describe("ErrorMessasgeView", function() {
     </div>`);
     });
   });
-})
+});

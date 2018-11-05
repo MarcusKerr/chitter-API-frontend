@@ -13,8 +13,8 @@
     return this.signUpView.create();
   }
 
-  MainController.prototype.renderErrorMessage = function(errorMsg) {
-    return new this.errorMessageView().create(errorMsg);
+  MainController.prototype.renderErrorMessage = function(errorMsg, errorMsgModal = null) {
+    return new this.errorMessageView(errorMsg).create(errorMsgModal);
   }
 
   exports.MainController = MainController;
