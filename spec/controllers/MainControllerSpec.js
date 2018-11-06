@@ -12,7 +12,8 @@ describe("MainController", function() {
     indexView = jasmine.createSpyObj('indexView', ['create']);
     signUpView = jasmine.createSpyObj('signUpView', ['create']);
     errorMessageView = jasmine.createSpyObj('errorMessageView', ['create']);
-    mainController = new MainController(indexView, signUpView, errorMessageView);
+    usersController = jasmine.createSpyObj('usersController', ['createNewUser']);
+    mainController = new MainController(indexView, signUpView, errorMessageView, usersController);
   })
 
   describe(".renderIndex", function() {
@@ -35,4 +36,11 @@ describe("MainController", function() {
   //     expect(errorMsgView.create).toHaveBeenCalledWith(errorMsg);
   //   });
   // });
+
+  describe(".createNewUser", function() {
+    it("delegates to users controller", function() {
+      mainController.createNewUser();
+      expect(usersController.createUser).toHavebeenCalled();
+    });
+  });
 });
