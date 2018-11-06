@@ -5,7 +5,6 @@ var peepController;
 startApp();
 
 function startApp () {
-  mainController = new MainController();
   app.innerHTML = mainController.renderIndex();
   setButtons();
 };
@@ -30,7 +29,7 @@ function verifyFormData() {
   var confirmPassword = document.getElementById('confirm-password').value.toString();
   var letters = /^[A-Za-z]+$/;
 
-  if (handle === "" || password === ""  || confirmPassword === "") {
+  if (handle === "" || password === "" || confirmPassword === "") {
     displaySignUpError('Please complete all fields')
   } else if (!handle[0].match(letters)) {
     displaySignUpError('Handle must begin with a letter');
@@ -45,16 +44,8 @@ function verifyFormData() {
     displaySignUpError('Passwords must be the same');
     resetForm();
   } else {
-    createNewUser();
+    createNewUser(handle, password);
   }
-  // var userData = {  "user": {
-  //                     "handle": handle.toString(),
-  //                     "password": password.toString()
-  //                   }
-  //                 }
-
-  // console.log(userData);
-  // displayPeepsList();
 };
 
 function displaySignUpError(errorMsg) {

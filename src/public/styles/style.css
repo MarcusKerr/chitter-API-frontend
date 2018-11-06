@@ -101,6 +101,10 @@ body {
   outline: 0;
 }
 
+#errorMsgModal .modal-body >p {
+  color: tomato;
+}
+
 /* Peeplist */
 
 #peep-list {

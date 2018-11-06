@@ -5,7 +5,7 @@
   }
 
   User.prototype.new = function(userData) {
-    this._client.post(this._path, userData);
+    return this._client.post(this._path, userData);
   }
 
   exports.User = User;
