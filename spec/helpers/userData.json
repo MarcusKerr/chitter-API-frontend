@@ -1,5 +1,5 @@
-{
-  "name": "Marcus Kerr",
-  "password": "12345",
-  "confirm-password": "12345"
+{ "user": {
+  "handle": "Marcus Kerr",
+  "password": "12345"
+  }
 }

@@ -61,8 +61,15 @@ function resetForm() {
   setSubmitButton();
 };
 
-function createNewUser() {
-  console.log('new user');
+function createNewUser(handle, password) {
+ mainController.createNewUser(handle, password);
+ document.getElementById('confirm-sign-up-btn').disabled = true;
+ //if successful,
+  //log in
+  // show peepslist
+// else
+  //  show error messafe
+  //reset form
 };
 
 // function displayPeepsList() {

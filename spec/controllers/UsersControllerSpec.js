@@ -1,9 +1,10 @@
 'use strict';
 describe("UserController", function() {
   var UsersController = require("../../src/controllers/UsersController").UsersController;
-  var userData = require('../helpers/userData.json');
   var usersController;
   var user;
+  var handle = "Marcus";
+  var password = "124";
 
   beforeEach(function() {
     user = jasmine.createSpyObj("user", ['new'])
@@ -12,8 +13,8 @@ describe("UserController", function() {
 
   describe(".createUser", function() {
     it("Delegates to the user model", function(){
-      usersController.createUser(userData);
-      expect(user.new).toHaveBeenCalledWith(userData);
+      usersController.createNewUser(handle, password);
+      expect(user.new).toHaveBeenCalledWith(handle, password);
     });
   });
 });

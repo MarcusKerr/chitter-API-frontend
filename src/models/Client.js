@@ -14,7 +14,7 @@
   };
 
   Client.prototype.post = function(path, data) {
-    return fetch(fetch(this._url+path), {
+    return fetch(this._url+path, {
       method: 'POST',
       body: JSON.stringify(data),
       headers:{'Content-Type': 'application/json'}

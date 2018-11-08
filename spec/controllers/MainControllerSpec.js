@@ -7,6 +7,7 @@ describe("MainController", function() {
   var indexView;
   var signUpView;
   var errorMessageView;
+  var usersController;
 
   beforeEach(function() {
     indexView = jasmine.createSpyObj('indexView', ['create']);
@@ -40,7 +41,7 @@ describe("MainController", function() {
   describe(".createNewUser", function() {
     it("delegates to users controller", function() {
       mainController.createNewUser();
-      expect(usersController.createUser).toHavebeenCalled();
+      expect(usersController.createNewUser).toHaveBeenCalled();
     });
   });
 });
