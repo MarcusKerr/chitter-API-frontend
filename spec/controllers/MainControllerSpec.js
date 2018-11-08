@@ -36,7 +36,7 @@ describe("MainController", function() {
   describe(".renderLogIn", function() {
     it("delegates to log in view", function() {
       mainController.renderLogIn();
-      expect(logInView.create).toHavebeenCalled();
+      expect(logInView.create).toHaveBeenCalled();
     });
   });
 

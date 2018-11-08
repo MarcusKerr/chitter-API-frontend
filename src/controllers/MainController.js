@@ -1,7 +1,8 @@
 (function(exports){
-  function MainController (indexView = new IndexView(), signUpView = new SignUpView(), errorMessageView = ErrorMessageView, usersController = new UsersController()) {
+  function MainController (indexView = new IndexView(), signUpView = new SignUpView(), logInView = new LogInView(), errorMessageView = ErrorMessageView, usersController = new UsersController()) {
     this.indexView = indexView;
     this.signUpView = signUpView;
+    this.logInView = logInView;
     this.errorMessageView = errorMessageView;
     this.usersController = usersController;
   };
@@ -12,6 +13,10 @@
 
   MainController.prototype.renderSignUp = function () {
     return this.signUpView.create();
+  }
+  
+  MainController.prototype.renderLogIn = function () {
+    return this.logInView.create();
   }
 
   MainController.prototype.renderErrorMessage = function(errorMsg, errorMsgModal = null) {
