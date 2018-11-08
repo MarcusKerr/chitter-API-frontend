@@ -11,10 +11,7 @@
         'password': password
       }
     }
-    return this._post(userData)
-      .then(function(response) {
-        console.log(response.handle);
-      });
+    return this._post(userData);
   };
 
   User.prototype._post = function(userData) {

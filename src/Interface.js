@@ -16,7 +16,9 @@ function setButtons () {
 };
 
 function setSubmitButton () {
-  document.getElementById('confirm-sign-up-btn').addEventListener("click", function(e) {
+  var signUpBtn = document.getElementById('confirm-sign-up-btn');
+  signUpBtn.disabled = false;
+  signUpBtn.addEventListener("click", function(e) {
     e.preventDefault();
     verifyFormData();
   });
@@ -62,15 +64,20 @@ function resetForm() {
 };
 
 function createNewUser(handle, password) {
- mainController.createNewUser(handle, password);
- document.getElementById('confirm-sign-up-btn').disabled = true;
- //if successful,
-  //log in
-  // show peepslist
-// else
-  //  show error messafe
-  //reset form
+  document.getElementById('confirm-sign-up-btn').disabled = true;
+  mainController.createNewUser(handle, password)
+    .then(function(response){
+      if (response.status === 422) {
+        displaySignUpError(`The handle ${handle} is already in use`);
+      } else if (response.status === 201) {
+        loginUser(handle, password);
+      }
+    });
 };
+
+function loginUser(handle, password) {
+
+}
 
 // function displayPeepsList() {
 //   peepController = new PeepsController();

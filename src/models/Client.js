@@ -20,7 +20,7 @@
       headers:{'Content-Type': 'application/json'}
     })
     .then(function (response){
-      return response.json();
+      return response;
     })
     .catch(function (error) {
       console.log('There was an error posting to the API:', error);
