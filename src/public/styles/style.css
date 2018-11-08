@@ -48,31 +48,36 @@ body {
   background-color: tomato;
 }
 
-/* Sign Up*/
+/* Sign Up / Log In */
 
-#sign-up-container {
+#sign-up-container,
+#log-in-container {
   background-color: #fff;
   margin-top: 5%;
 }
 
-#sign-up-wrapper {
+#sign-up-wrapper,
+#log-in-container {
   margin-left: 115px; 
   margin-right: 115px;
   padding-bottom: 15px;
   text-align: center;
 }
 
-#sign-up-wrapper > h3 {
+#sign-up-wrapper > h3,
+#log-in-wrapper > h3 {
   padding-top: 40px;
   padding-bottom: 20px;
 }
 
-.sign-up-input > input{
+.sign-up-input > input,
+.log-in-input > input{
   width: 280px;
   margin-bottom: 15px;
 }
 
-#confirm-sign-up-btn {
+#confirm-sign-up-btn,
+#confirm-log-in-btn {
   margin-top: 15px;
   width: 75px;
   height: 34px;

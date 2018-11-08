@@ -1,12 +1,11 @@
-'use strict';
-describe("LogInView", function() {
-  var LogInView = require("../../src/views/LogInView").LogInView;
-  var logInView;
+(function(exports) {
 
-  describe("create", function() {
-    it("returns hrtml string for log in page", function() {
-      logInView = new LogInView();
-      expect(logInView.create()).toEqual(`<div id="log-in-container" class="col-md-7 mx-auto">
+  function LogInView () {
+
+  };
+
+  LogInView.prototype.create = function () {
+    return `<div id="log-in-container" class="col-md-7 mx-auto">
       <div id="log-in-wrapper">
         <h3>Log in to Chitter</h3>
         <form>
@@ -19,7 +18,8 @@ describe("LogInView", function() {
           <button id="confirm-log-in-btn" class="btn">Log In</button>
         </form>
       </div>
-    </div>`);
-    });
-  });
-});
+    </div>`;
+  };
+
+  exports.LogInView = LogInView;
+})(this);
