@@ -7,5 +7,9 @@
     return this.user.new(handle, password);
   };
 
+  UsersController.prototype.loginUser = function(handle,password) {
+    return this.user.login(handle, password);
+  }
+
   exports.UsersController = UsersController;
 })(this);

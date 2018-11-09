@@ -7,7 +7,7 @@ describe("UserController", function() {
   var password = "124";
 
   beforeEach(function() {
-    user = jasmine.createSpyObj("user", ['new'])
+    user = jasmine.createSpyObj("user", ['new', 'login'])
     usersController = new UsersController(user);
   })
 

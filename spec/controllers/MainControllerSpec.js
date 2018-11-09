@@ -15,7 +15,7 @@ describe("MainController", function() {
     signUpView = jasmine.createSpyObj('signUpView', ['create']);
     logInView = jasmine.createSpyObj('logInView', ['create']);
     errorMessageView = jasmine.createSpyObj('errorMessageView', ['create']);
-    usersController = jasmine.createSpyObj('usersController', ['createNewUser', 'login']);
+    usersController = jasmine.createSpyObj('usersController', ['createNewUser', 'loginUser']);
     mainController = new MainController(indexView, signUpView, logInView, errorMessageView, usersController);
   })
 
