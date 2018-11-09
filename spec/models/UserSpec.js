@@ -19,4 +19,11 @@ describe("User", function() {
       expect(client.post).toHaveBeenCalledWith(path, userData);
     });
   });
+
+  describe(".login", function() {
+    it("delegates to the client", function() {
+      user.login(handle, password);
+      expect(client.post).toHaveBeenCalledWith(path, handle, password);
+    });
+  });
 });
