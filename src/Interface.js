@@ -13,6 +13,10 @@ function setButtons () {
     app.innerHTML = mainController.renderSignUp();
     setSubmitButton();
   });
+
+  document.getElementById('log-in-btn').addEventListener("click", function() {
+    app.innerHTML = mainController.renderLogIn();
+  });
 };
 
 function setSubmitButton () {
@@ -65,7 +69,7 @@ function resetForm() {
 
 function createNewUser(handle, password) {
   document.getElementById('confirm-sign-up-btn').disabled = true;
-  mainController.createNewUser(handle, password)
+  return mainController.createNewUser(handle, password)
     .then(function(response){
       if (response.status === 422) {
         displaySignUpError(`The handle ${handle} is already in use`);

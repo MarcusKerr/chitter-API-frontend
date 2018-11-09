@@ -15,7 +15,7 @@ describe("MainController", function() {
     signUpView = jasmine.createSpyObj('signUpView', ['create']);
     logInView = jasmine.createSpyObj('logInView', ['create']);
     errorMessageView = jasmine.createSpyObj('errorMessageView', ['create']);
-    usersController = jasmine.createSpyObj('usersController', ['createNewUser']);
+    usersController = jasmine.createSpyObj('usersController', ['createNewUser', 'login']);
     mainController = new MainController(indexView, signUpView, logInView, errorMessageView, usersController);
   })
 
@@ -51,6 +51,15 @@ describe("MainController", function() {
     it("delegates to users controller", function() {
       mainController.createNewUser();
       expect(usersController.createNewUser).toHaveBeenCalled();
+    });
+  });
+
+  describe(".logInUser", function() {
+    it("delegates to users controller", function() {
+      var handle = "Mk";
+      var password = "123";
+      mainController.loginUser(handle, password);
+      expect(usersController.login).toHaveBeenCalled(handle, password);
     });
   });
 });
