@@ -23,7 +23,13 @@ describe("User", function() {
   describe(".login", function() {
     it("delegates to the client", function() {
       user.login(handle, password);
-      expect(client.post).toHaveBeenCalledWith(path, handle, password);
+      var sessionData = {
+      session: {
+        'handle': handle,
+        'password': password
+      }
+    };
+      expect(client.post).toHaveBeenCalledWith('/sessions', sessionData);
     });
   });
 });
