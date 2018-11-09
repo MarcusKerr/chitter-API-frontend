@@ -59,7 +59,7 @@ describe("MainController", function() {
       var handle = "Mk";
       var password = "123";
       mainController.loginUser(handle, password);
-      expect(usersController.login).toHaveBeenCalledWith(handle, password);
+      expect(usersController.loginUser).toHaveBeenCalledWith(handle, password);
     });
   });
 });

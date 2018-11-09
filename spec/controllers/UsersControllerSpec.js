@@ -17,4 +17,11 @@ describe("UserController", function() {
       expect(user.new).toHaveBeenCalledWith(handle, password);
     });
   });
+
+  describe(".login", function() {
+    it("delegates to the user model", function(){
+      usersController.loginUser(handle, password);
+      expect(user.login).toHaveBeenCalledWith(handle, password);
+    });
+  });
 });

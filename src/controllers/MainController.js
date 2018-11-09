@@ -28,7 +28,7 @@
   };
 
   MainController.prototype.loginUser = function(handle, password) {
-    return this.usersController.login(handle, password);
+    return this.usersController.loginUser(handle, password);
   };
 
   exports.MainController = MainController;
