@@ -13,18 +13,23 @@
 
   MainController.prototype.renderSignUp = function () {
     return this.signUpView.create();
-  }
+  };
   
   MainController.prototype.renderLogIn = function () {
     return this.logInView.create();
-  }
+  };
 
   MainController.prototype.renderErrorMessage = function(errorMsg, errorMsgModal = null) {
     return new this.errorMessageView(errorMsg).create(errorMsgModal);
-  }
+  };
 
   MainController.prototype.createNewUser = function(handle, password) {
     return this.usersController.createNewUser(handle, password);
-  }
+  };
+
+  MainController.prototype.loginUser = function(handle, password) {
+    return this.usersController.login(handle, password);
+  };
+
   exports.MainController = MainController;
 })(this);
