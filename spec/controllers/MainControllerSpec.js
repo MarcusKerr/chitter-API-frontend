@@ -71,4 +71,20 @@ describe("MainController", function() {
       expect(peepsController.renderPeepsList).toHaveBeenCalled();
     });
   });
+
+  describe(".startSession", function() {
+    it("stores user id and a valid session key", function() {
+      mainController.startSession(sessionData);
+      expect(mainController.session.user_id).toEqual('1');
+      expect(mainController.session.session_key).toEqual('a_valid_session_key');
+    });
+  });
+
+  describe(".endSession", function() {
+    it("clears the session data", function () {
+      mainController.endSession();
+      expect(mainController.session.user_id).toEqual('');
+      expect(mainController.session.session_key).toEqual('');
+    });
+  });
 });

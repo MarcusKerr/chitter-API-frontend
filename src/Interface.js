@@ -1,5 +1,6 @@
 var app = document.getElementById('app');
-var mainController = new MainController();               
+var mainController = new MainController();
+// var session = window.localStorage;             
 
 startApp();
 
@@ -30,6 +31,7 @@ function setFormButton () {
 };
 
 function verifyFormData() {
+  document.getElementsByClassName('btn')[0].disabled = true;
   var inputsArray = document.getElementsByTagName('input');
   if (!allFieldsComplete(inputsArray)) {
     displayError('Please complete all fields');
@@ -93,7 +95,6 @@ function resetForm() {
 };
 
 function createNewUser(handle, password) {
-  document.getElementById('confirm-sign-up-btn').disabled = true;
   return mainController.createNewUser(handle, password)
     .then(function(response){
       if (response.status === 422) {
@@ -105,12 +106,12 @@ function createNewUser(handle, password) {
 };
 
 function logInUser(handle, password) {
-  mainController.loginUser(handle, password)
+  return mainController.loginUser(handle, password)
     .then(function(response) {
       if(response.status === 500) {
         displayError(`The details you enetered were incorrect`);
       } else if (response.status === 201) {
-        return response.json()
+        return response.json();
       }
     })
     .then(function(sessionData) {
@@ -120,7 +121,9 @@ function logInUser(handle, password) {
 
 function startSession(sessionData) {
   // start session
-  displayPeepsList();
+  // session.setItem('user', `${sessionData.user_id}`);
+  // session.setItem('key', `${sessionData.session_key}`);
+  // displayPeepsList();
 };
 
 function displayPeepsList() {
@@ -129,8 +132,6 @@ function displayPeepsList() {
     app.innerHTML = response
   });
 };
-
-// var peepController = new PeepController();
 
 // showPeepOnChangeUrl();
 
