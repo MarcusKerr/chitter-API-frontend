@@ -5,51 +5,75 @@ startApp();
 
 function startApp () {
   app.innerHTML = mainController.renderIndex();
-  setButtons();
+  setIndexButtons();
 };
 
-function setButtons () {
+function setIndexButtons () {
   document.getElementById('sign-up-btn').addEventListener("click", function() {
     app.innerHTML = mainController.renderSignUp();
-    setSubmitButton();
+    setFormButton();
   });
 
   document.getElementById('log-in-btn').addEventListener("click", function() {
     app.innerHTML = mainController.renderLogIn();
+    setFormButton();
   });
 };
 
-function setSubmitButton () {
-  var signUpBtn = document.getElementById('confirm-sign-up-btn');
-  signUpBtn.disabled = false;
-  signUpBtn.addEventListener("click", function(e) {
+function setFormButton () {
+  var btn = document.getElementsByClassName('btn');
+  btn[0].disabled = false;
+  btn[0].addEventListener("click", function(e) {
     e.preventDefault();
     verifyFormData();
   });
 };
 
 function verifyFormData() {
-  var handle = document.getElementById('handle').value.toString();
-  var password = document.getElementById('password').value.toString();
-  var confirmPassword = document.getElementById('confirm-password').value.toString();
-  var letters = /^[A-Za-z]+$/;
-
-  if (handle === "" || password === "" || confirmPassword === "") {
-    return displaySignUpError('Please complete all fields')
-  } else if (!handle[0].match(letters)) {
-    return displaySignUpError('Handle must begin with a letter');
-  } else if (handle.includes(" ")) {
-    return displaySignUpError('Your handle cannot contain spaces');
-  } else if (password.includes(" ")) { 
-    return displaySignUpError('Your password cannot contain spaces');
-  } else if (password !== confirmPassword) {
-    return displaySignUpError('Passwords must be the same');
+  var inputsArray = document.getElementsByTagName('input');
+  if (!allFieldsComplete(inputsArray)) {
+    displayError('Please complete all fields');
+  } else if (!validInput(inputsArray[0])) {
+    displayError('Handle must begin with a letter');
+  } else if (containsSpaces(inputsArray[0])) {
+    displayError('Handle must not contain spaces');
+  } else if (containsSpaces(inputsArray[1])) {
+    displayError('Password must not contain spaces');
+  } else if (inputsArray.length === 3) {
+    if (!passwordMatch(inputsArray)) {
+      displayError('Passwords must be the same');
+    } else {
+      createNewUser(inputsArray[0].value.toString(), inputsArray[1].value.toString());
+    }
   } else {
-    createNewUser(handle, password);
+    logInUser(inputsArray[0].value.toString(), inputsArray[1].value.toString());
   }
 };
 
-function displaySignUpError(errorMsg) {
+function allFieldsComplete(inputsArray) {
+  for (var i = 0; i < inputsArray.length; i ++) {
+    if (inputsArray[i].value === "") return false;
+  }
+  return true;
+};
+
+function validInput(input) {
+  var letters = /^[A-Za-z]+$/;
+  if (input.value.toString()[0].match(letters)) return true;
+  return false;
+};
+
+function containsSpaces(input) {
+  if (input.value.toString().includes(" ")) return true;
+  return false;
+};
+
+function passwordMatch(inputsArray) {
+  if (inputsArray[1].value.toString() === inputsArray[2].value.toString()) return true;
+  return false;
+};
+
+function displayError(errorMsg) {
   var errorMessageModal = document.getElementById('errorMsgModal');
   if(errorMessageModal) {
     errorMessageModal.innerHTML = mainController.renderErrorMessage(errorMsg, true);
@@ -61,10 +85,11 @@ function displaySignUpError(errorMsg) {
 };
 
 function resetForm() {
-  document.getElementById('handle').value = "";
-  document.getElementById('password').value = "";
-  document.getElementById('confirm-password').value = "";
-  setSubmitButton();
+  var inputsArray = document.getElementsByTagName('input');
+  for (var i = 0; i < inputsArray.length; i++) {
+    inputsArray[i].value = "";
+  }
+  setFormButton();
 };
 
 function createNewUser(handle, password) {
@@ -72,16 +97,31 @@ function createNewUser(handle, password) {
   return mainController.createNewUser(handle, password)
     .then(function(response){
       if (response.status === 422) {
-        displaySignUpError(`The handle ${handle} is already in use`);
+        return displayError(`The handle ${handle} is already in use`);
       } else if (response.status === 201) {
-        loginUser(handle, password);
+        return logInUser(handle, password);
       }
     });
 };
 
-function loginUser(handle, password) {
+function logInUser(handle, password) {
+  mainController.loginUser(handle, password)
+    .then(function(response) {
+      if(response.status === 500) {
+        displayError(`The details you enetered were incorrect`);
+      } else if (response.status === 201) {
+       console.log(response.json())
+       //start session
+      }
+    })
+};
 
-}
+function startSession() {
+  // start session
+  // render peepslist
+};
+
+
 
 // function displayPeepsList() {
 //   peepController = new PeepsController();
