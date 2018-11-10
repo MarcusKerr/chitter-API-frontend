@@ -120,19 +120,15 @@ function logInUser(handle, password) {
 
 function startSession(sessionData) {
   // start session
-  // render peepslist
-  console.log(sessionData);
+  displayPeepsList();
 };
 
-
-
-// function displayPeepsList() {
-//   peepController = new PeepsController();
-//   peepController.renderPeepsList()
-//   .then(response => {
-//     app.innerHTML = response
-//   });
-// };
+function displayPeepsList() {
+  mainController.renderPeepsList()
+  .then(function(response){
+    app.innerHTML = response
+  });
+};
 
 // var peepController = new PeepController();
 
