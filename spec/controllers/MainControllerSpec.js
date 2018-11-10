@@ -9,6 +9,7 @@ describe("MainController", function() {
   var logInView;
   var errorMessageView;
   var usersController;
+  var peepsController;
 
   beforeEach(function() {
     indexView = jasmine.createSpyObj('indexView', ['create']);
@@ -16,7 +17,8 @@ describe("MainController", function() {
     logInView = jasmine.createSpyObj('logInView', ['create']);
     errorMessageView = jasmine.createSpyObj('errorMessageView', ['create']);
     usersController = jasmine.createSpyObj('usersController', ['createNewUser', 'loginUser']);
-    mainController = new MainController(indexView, signUpView, logInView, errorMessageView, usersController);
+    peepsController = jasmine.createSpyObj('peepsController', ['renderPeepsList']);
+    mainController = new MainController(indexView, signUpView, logInView, errorMessageView, usersController, peepsController);
   })
 
   describe(".renderIndex", function() {
@@ -60,6 +62,13 @@ describe("MainController", function() {
       var password = "123";
       mainController.loginUser(handle, password);
       expect(usersController.loginUser).toHaveBeenCalledWith(handle, password);
+    });
+  });
+
+  describe(".renderPeepsList", function() {
+    it("delegates to peeps controller", function() {
+      mainController.renderPeepsList();
+      expect(peepsController.renderPeepsList).toHaveBeenCalled();
     });
   });
 });

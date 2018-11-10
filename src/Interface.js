@@ -110,15 +110,18 @@ function logInUser(handle, password) {
       if(response.status === 500) {
         displayError(`The details you enetered were incorrect`);
       } else if (response.status === 201) {
-       console.log(response.json())
-       //start session
+        return response.json()
       }
     })
+    .then(function(sessionData) {
+      startSession(sessionData);
+    });
 };
 
-function startSession() {
+function startSession(sessionData) {
   // start session
   // render peepslist
+  console.log(sessionData);
 };
 
 
