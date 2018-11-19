@@ -3,8 +3,8 @@
     this._url = url;
   }
 
-  Client.prototype.connect = function(path) {
-    return fetch(this._url+path)
+  Client.prototype.get = function(path) {
+    return fetch(this._url + path)
       .then(function (response) {
         return response.json();
       })
@@ -14,16 +14,20 @@
   };
 
   Client.prototype.post = function(path, data) {
-    return fetch(this._url+path, {
+    return fetch(this._url + path, {
       method: 'POST',
       body: JSON.stringify(data),
       headers:{'Content-Type': 'application/json'}
     })
     .then(function (response){
-      return response;
+      if(response.status === 201) {
+        return response.json();
+      } else {
+        throw new Error('There was an error posting to the API.');
+      }
     })
     .catch(function (error) {
-      console.log('There was an error posting to the API:', error);
+      return Error(error);
     });
   };
 

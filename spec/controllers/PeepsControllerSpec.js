@@ -2,40 +2,40 @@
 describe("PeepController", function() {
   var PeepsController = require("../../src/controllers/PeepsController").PeepsController;
   var peepsController;
-  var client;
-  var peepsList;
-  var peepsListView;
-  var singlePeepView;
+  var mockClient;
+  var mockPeepsList;
+  var mockPeepsListView;
+  var mockSinglePeepView;
   var peepId = 175;
   var peepModal = null;
 
   beforeEach(function() {
-    client = jasmine.createSpyObj('client', ['connect']);
-    peepsList = jasmine.createSpyObj('peepsList', ['getPeeps']);
+    mockClient = jasmine.createSpyObj('mockClient', ['connect']);
+    mockPeepsList = jasmine.createSpyObj('mockPeepsList', ['getPeeps']);
 
-    peepsListView = jasmine.createSpyObj('peepsListView', ['create']);
-    peepsListView.create.and.callFake(function() {
+    mockPeepsListView = jasmine.createSpyObj('mockPeepsListView', ['create']);
+    mockPeepsListView.create.and.callFake(function() {
       return Promise.resolve('<div><ol><li>Peeps List</li></ol></div>');
     });
     
-    singlePeepView = jasmine.createSpyObj('singlePeepView', ['create']);
-    singlePeepView.create.and.callFake(function() {
+    mockSinglePeepView = jasmine.createSpyObj('mockSinglePeepView', ['create']);
+    mockSinglePeepView.create.and.callFake(function() {
       return Promise.resolve('<div><p>Single Peep</p></div>')
     });
-    peepsController = new PeepsController(client, peepsList, peepsListView, singlePeepView);
+    peepsController = new PeepsController(mockClient, mockPeepsList, mockPeepsListView, mockSinglePeepView);
   });
 
   describe(".renderPeepsList", function() {
     it("delegates to peepListview", function() {
       peepsController.renderPeepsList()
-      expect(peepsListView.create).toHaveBeenCalled();
+      expect(mockPeepsListView.create).toHaveBeenCalled();
     });
   });
 
   // describe(".renderSinglePeep", function() {
-  //   it("delegates to singlePeepView", function() {
+  //   it("delegates to mockSinglePeepView", function() {
   //     peepsController.renderSinglePeep(peepId, peepModal);
-  //     expect(singlePeepView.create).toHaveBeenCalled();
+  //     expect(mockSinglePeepView.create).toHaveBeenCalled();
   //   });
   // });
 });

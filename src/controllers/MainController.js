@@ -1,11 +1,11 @@
 (function(exports){
-  function MainController (indexView = new IndexView(), signUpView = new SignUpView(), logInView = new LogInView(), errorMessageView = ErrorMessageView, usersController = new UsersController(), peepsController = new PeepsController()) {
+  function MainController (usersController = new UsersController(), peepsController = new PeepsController(), indexView = new IndexView(), signUpView = new SignUpView(), logInView = new LogInView(), errorMessageView = ErrorMessageView) {
+    this.usersController = usersController;
+    this.peepsController = peepsController;
     this.indexView = indexView;
     this.signUpView = signUpView;
     this.logInView = logInView;
     this.errorMessageView = errorMessageView;
-    this.usersController = usersController;
-    this.peepsController = peepsController;
   };
 
   MainController.prototype.renderIndex = function () {
@@ -22,7 +22,7 @@
 
   MainController.prototype.renderPeepsList = function() {
     return this.peepsController.renderPeepsList();
-  }
+  };
 
   MainController.prototype.renderErrorMessage = function(errorMsg, errorMsgModal = null) {
     return new this.errorMessageView(errorMsg).create(errorMsgModal);
@@ -32,8 +32,16 @@
     return this.usersController.createNewUser(handle, password);
   };
 
-  MainController.prototype.loginUser = function(handle, password) {
-    return this.usersController.loginUser(handle, password);
+  MainController.prototype.logInUser = function(handle, password) {
+    return this.usersController.logInUser(handle, password);
+  };
+
+  MainController.prototype.logOut = function() {
+    return this.usersController.logOut();
+  };
+
+  MainController.prototype.inSession = function() {
+    return this.usersController.inSession();
   };
 
   exports.MainController = MainController;

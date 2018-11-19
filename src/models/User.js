@@ -4,23 +4,11 @@
   };
 
   User.prototype.new = function(handle, password) {
-    var userData = {
-      user: {
-        'handle': handle,
-        'password': password
-      }
-    };
-    return this._client.post('/users', userData);
+    return this._client.post('/users', { user: { 'handle': handle, 'password': password } });
   };
 
   User.prototype.login = function(handle, password) {
-    var sessionData = {
-      session: {
-        'handle': handle,
-        'password': password
-      }
-    };
-    return this._client.post('/sessions', sessionData)
+    return this._client.post('/sessions', { session: { 'handle': handle, 'password': password } });
   };
 
   exports.User = User;

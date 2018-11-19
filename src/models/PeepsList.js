@@ -6,7 +6,7 @@ function PeepsList (client) {
 }
 
 PeepsList.prototype.getPeeps = function () {
-  return this._client.connect(this._path);
+  return this._client.get(this._path);
 }
 
 exports.PeepsList = PeepsList;

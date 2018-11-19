@@ -1,6 +1,5 @@
 var app = document.getElementById('app');
-var mainController = new MainController();
-// var session = window.localStorage;             
+var mainController = new MainController();            
 
 startApp();
 
@@ -95,35 +94,22 @@ function resetForm() {
 };
 
 function createNewUser(handle, password) {
-  return mainController.createNewUser(handle, password)
+  mainController.createNewUser(handle, password)
     .then(function(response){
-      if (response.status === 422) {
-        return displayError(`The handle ${handle} is already in use`);
-      } else if (response.status === 201) {
-        return logInUser(handle, password);
-      }
+      response === true ? displayPeepsList() : displayError(`The handle ${handle} is already in use`);
     });
 };
 
 function logInUser(handle, password) {
-  return mainController.loginUser(handle, password)
-    .then(function(response) {
-      if(response.status === 500) {
-        displayError(`The details you enetered were incorrect`);
-      } else if (response.status === 201) {
-        return response.json();
-      }
-    })
-    .then(function(sessionData) {
-      startSession(sessionData);
+  mainController.logInUser(handle, password)
+    .then(function(response){
+      response === true ? displayPeepsList() : displayError('The details you enetered were incorrect');
     });
 };
 
-function startSession(sessionData) {
-  // start session
-  // session.setItem('user', `${sessionData.user_id}`);
-  // session.setItem('key', `${sessionData.session_key}`);
-  // displayPeepsList();
+function logOut(){
+  mainController.endSession();
+  startApp();
 };
 
 function displayPeepsList() {

@@ -1,7 +1,8 @@
 html,
 body {
   width: 100%;
-  height: 100%;
+  height: 1000px;;
+  /* height: 100%; */
   background-color: tomato;
 }
 
@@ -85,7 +86,7 @@ body {
   background-color: tomato;
 }
 
-/* Sign up error messages */
+/* Error messages */
 
 #errorMsgModal .modal-header {
   padding-top: 5px;
@@ -108,6 +109,13 @@ body {
 
 #errorMsgModal .modal-body >p {
   color: tomato;
+}
+
+/* Nav bar */
+
+#nav-bar{
+  height: 45px;
+  background-color: #fff;
 }
 
 /* Peeplist */

@@ -2,89 +2,89 @@
 
 describe("MainController", function() {
 
-  var MainController = require("../../src/controllers/MainController").MainController;
+  const MainController = require("../../src/controllers/MainController").MainController;
+  const sessionData = require("../helpers/sessionData.json");
+  var handle = "Mk";
+  var password = "123";
   var mainController;
-  var indexView;
-  var signUpView;
-  var logInView;
-  var errorMessageView;
-  var usersController;
-  var peepsController;
+  var mockUsersController;
+  var mockPeepsController;
+  var mockIndexView;
+  var mockSignUpView;
+  var mockLogInView;
+  var mockErrorMessageView
 
   beforeEach(function() {
-    indexView = jasmine.createSpyObj('indexView', ['create']);
-    signUpView = jasmine.createSpyObj('signUpView', ['create']);
-    logInView = jasmine.createSpyObj('logInView', ['create']);
-    errorMessageView = jasmine.createSpyObj('errorMessageView', ['create']);
-    usersController = jasmine.createSpyObj('usersController', ['createNewUser', 'loginUser']);
-    peepsController = jasmine.createSpyObj('peepsController', ['renderPeepsList']);
-    mainController = new MainController(indexView, signUpView, logInView, errorMessageView, usersController, peepsController);
-  })
+    mockUsersController = jasmine.createSpyObj('mockUsersController', ['createNewUser', 'logInUser', 'logOut', 'inSession']);
+    mockPeepsController = jasmine.createSpyObj('mockPeepsController', ['renderPeepsList']);
+
+    mockIndexView = jasmine.createSpyObj('mockIndexView', ['create']);
+    mockSignUpView = jasmine.createSpyObj('mockSignUpView', ['create']);
+    mockLogInView = jasmine.createSpyObj('mockLogInView', ['create']);
+    mockErrorMessageView = jasmine.createSpyObj('mockErrorMessageView', ['create']);
+
+    mainController = new MainController(mockUsersController, mockPeepsController, mockIndexView, mockSignUpView, mockLogInView, mockErrorMessageView);
+  });
 
   describe(".renderIndex", function() {
     it("delegates to index View", function() {
       mainController.renderIndex();
-      expect(indexView.create).toHaveBeenCalled();
+      expect(mockIndexView.create).toHaveBeenCalled();
     });
   });
 
   describe(".renderSignUp", function() {
     it("delagates to sign up view", function() {
       mainController.renderSignUp();
-      expect(signUpView.create).toHaveBeenCalled();
+      expect(mockSignUpView.create).toHaveBeenCalled();
     });
   });
 
   describe(".renderLogIn", function() {
     it("delegates to log in view", function() {
       mainController.renderLogIn();
-      expect(logInView.create).toHaveBeenCalled();
-    });
-  });
-
-  // describe(".renderErrorMessage", function() {
-  //   it("delegates to error message view", function() {
-  //     mainController.renderErrorMessage();
-  //     expect(errorMsgView.create).toHaveBeenCalledWith(errorMsg);
-  //   });
-  // });
-
-  describe(".createNewUser", function() {
-    it("delegates to users controller", function() {
-      mainController.createNewUser();
-      expect(usersController.createNewUser).toHaveBeenCalled();
-    });
-  });
-
-  describe(".logInUser", function() {
-    it("delegates to users controller", function() {
-      var handle = "Mk";
-      var password = "123";
-      mainController.loginUser(handle, password);
-      expect(usersController.loginUser).toHaveBeenCalledWith(handle, password);
+      expect(mockLogInView.create).toHaveBeenCalled();
     });
   });
 
   describe(".renderPeepsList", function() {
     it("delegates to peeps controller", function() {
       mainController.renderPeepsList();
-      expect(peepsController.renderPeepsList).toHaveBeenCalled();
+      expect(mockPeepsController.renderPeepsList).toHaveBeenCalled();
     });
   });
 
-  describe(".startSession", function() {
-    it("stores user id and a valid session key", function() {
-      mainController.startSession(sessionData);
-      expect(mainController.session.user_id).toEqual('1');
-      expect(mainController.session.session_key).toEqual('a_valid_session_key');
+  // describe(".renderErrorMessage", function() {
+  //   it("delegates to error message view", function() {
+  //     mainController.renderErrorMessage('This is an error message');
+  //   });
+  // });
+
+  describe(".createNewUser", function() {
+    it("delegates to users controller", function() {
+      mainController.createNewUser(handle, password);
+      expect(mockUsersController.createNewUser).toHaveBeenCalledWith(handle, password);
     });
   });
 
-  describe(".endSession", function() {
-    it("clears the session data", function () {
-      mainController.endSession();
-      expect(mainController.session.user_id).toEqual('');
-      expect(mainController.session.session_key).toEqual('');
+  describe(".logInUser", function() {
+    it("delegates to users controller", function() {
+      mainController.logInUser(handle, password);
+      expect(mockUsersController.logInUser).toHaveBeenCalledWith(handle, password);
+    });
+  });
+  
+  describe(".logOutUser", function() {
+    it("delegates to users controller", function() {
+      mainController.logOut();
+      expect(mockUsersController.logOut).toHaveBeenCalled();
+    });
+  });
+
+  describe(".inSession", function() {
+    it("delegates to the users controller", function() {
+      mainController.inSession();
+      expect(mockUsersController.inSession).toHaveBeenCalled();
     });
   });
 });

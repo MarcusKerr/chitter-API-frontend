@@ -14,7 +14,7 @@
     "eslint-plugin-import": "^2.14.0",
     "http-server": "^0.11.1",
     "jasmine": "^3.2.0",
-    "jasmine-node": "^1.16.2",
+    "jasmine-node": "^2.0.1",
     "webdriverio": "^4.14.0"
   },
   "scripts": {

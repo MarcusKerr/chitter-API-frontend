@@ -6,17 +6,17 @@ describe("User", function() {
   var password = '12345';
   var path = '/users';
   var user;
-  var client;
+  var mockClient;
 
   beforeEach(function() {
-    client = jasmine.createSpyObj('client', ['post']);
-    user = new User(client);
+    mockClient = jasmine.createSpyObj('mockClient', ['post']);
+    user = new User(mockClient);
   })
 
   describe(".new", function() {
     it("delegates to the client", function() {
       user.new(handle, password);
-      expect(client.post).toHaveBeenCalledWith(path, userData);
+      expect(mockClient.post).toHaveBeenCalledWith(path, userData);
     });
   });
 
@@ -29,7 +29,7 @@ describe("User", function() {
         'password': password
       }
     };
-      expect(client.post).toHaveBeenCalledWith('/sessions', sessionData);
+      expect(mockClient.post).toHaveBeenCalledWith('/sessions', sessionData);
     });
   });
 });

@@ -3,20 +3,20 @@ describe("PeepsListView", function() {
   var PeepsListView = require('../../src/views/PeepsListView').PeepsListView;
   var promisedData = require('../helpers/peepsPromisedData.json');
   var peepsListView;
-  var peepsList;
+  var mockPeepsList;
 
   beforeEach(function() {
-    peepsList = jasmine.createSpyObj('peepsList', ['getPeeps']);
-    peepsList.getPeeps.and.callFake(function() {
+    mockPeepsList = jasmine.createSpyObj('mockPeepsList', ['getPeeps']);
+    mockPeepsList.getPeeps.and.callFake(function() {
       return Promise.resolve(promisedData); 
     });
-    peepsListView = new PeepsListView(peepsList);
+    peepsListView = new PeepsListView(mockPeepsList);
   });
 
   describe(".create", function() {
     it("delegates collection of peep data to peepslist", function() {
       peepsListView.create()
-      expect(peepsList.getPeeps).toHaveBeenCalled();
+      expect(mockPeepsList.getPeeps).toHaveBeenCalled();
     });
 
     it("return html string containing peep data", function() {
