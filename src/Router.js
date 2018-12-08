@@ -9,7 +9,11 @@
   }
 
   Router.prototype.matchRoute = function (hash) {
-    return this.routes[hash]
+    return this.routes[hash];
+  };
+
+  Router.prototype.displyError = function (errorMsg, errorMsgModal = null) {
+    return this.pagesController.renderErrorMessage (errorMsg, errorMsgModal);
   };
 
   exports.Router = Router;

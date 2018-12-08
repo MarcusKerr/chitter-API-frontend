@@ -24,11 +24,11 @@ describe("UserController", function() {
   //   });
   // });
 
-  describe(".logOut", function() {
-    it("clears session data", function() {
-      usersController.logInUser(handle, password);
-      usersController.logOut();
-      expect(usersController.session).toEqual('');
-    });
-  });
+  // describe(".logOut", function() {
+  //   it("clears session data", function() {
+  //     usersController.logInUser(handle, password);
+  //     usersController.logOut();
+  //     expect(usersController.session).toEqual('');
+  //   });
+  // });
 });
