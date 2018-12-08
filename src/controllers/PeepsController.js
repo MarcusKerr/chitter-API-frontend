@@ -14,12 +14,12 @@
   };
 
   PeepsController.prototype.renderSinglePeep = function (peepId, peepModal) {
-      this._findPeep(peepId)
+      return this._findPeep(peepId)
         .then(peep => {
           return new this.singlePeepView(peep).create(peepModal);
         })
         .then(singlePeepHtml => {
-          console.log(singlePeepHtml);
+          // console.log(singlePeepHtml);
           return singlePeepHtml;
         });
   };

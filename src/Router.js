@@ -6,17 +6,24 @@
       '': [ pagesController.renderIndex(), setIndexButtons ],
       '#log-in': [ pagesController.renderLogIn(), setFormButton ],
       '#sign-up': [ pagesController.renderSignUp(), setFormButton ],
-      '#peeps': [ peepsController.renderPeepsList(), showPeepOnChangeUrl ]
+      '#peeps': [ peepsController.renderPeepsList()],
     }
   }
 
   Router.prototype.matchRoute = function (hash) {
+    if (hash.includes('#peeps/')){
+      return this.peepsController.renderSinglePeep(parseInt(hash.split('/')[1]), null);
+    } 
     return this.routes[hash];
   };
 
   Router.prototype.displayError = function (errorMsg, errorMsgModal = null) {
     return this.pagesController.renderErrorMessage (errorMsg, errorMsgModal);
   };
+
+  Router.prototype.getSinglePeep = function (peepId, peepModal) {
+    return this.peepsController.renderSinglePeep(peepId, peepModal);
+  }
 
   exports.Router = Router;
 })(this);

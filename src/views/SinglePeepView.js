@@ -8,7 +8,7 @@
     if (peepModal) {
       return this._formatPeep();
     } else {
-      return `<div class="modal fade" id="peepModal" tabindex="-1" role="dialog">${this._formatPeep()}</div>`;
+      return `<div class="modal fade" id="peep-modal" tabindex="-1" role="dialog">${this._formatPeep()}</div>`;
     }
   }
 

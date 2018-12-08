@@ -5,13 +5,21 @@ window.addEventListener('hashchange', updatePage)
 updatePage();
 
 function updatePage () {
-  var routerRespone = router.matchRoute(window.location.hash)
-  if (window.location.hash === "#peeps") {
-    routerRespone[0].then(res => { app.innerHTML = res })
+  if(window.location.hash.includes('#peeps/')){
+    var rr = router.matchRoute('#peeps')
+    rr[0].then(res => { app.innerHTML = res })
+    showSinglePeep(parseInt(window.location.hash.split('/')[1]));
   } else {
-    app.innerHTML = routerRespone[0];
+    var routerRespone = router.matchRoute(window.location.hash)
+    if (window.location.hash === "#peeps") {
+      routerRespone[0].then(res => { app.innerHTML = res })
+    } else {
+      app.innerHTML = routerRespone[0];
+    }
+    if (routerRespone.length > 1) {
+      routerRespone[1]();
+    }
   }
-  routerRespone[1]();
 };
 
 function updateUrl(hash) {
@@ -115,30 +123,48 @@ function setFormButton () {
 //       response === true ? displayPeepsList() : displayError('The details you enetered were incorrect');
 //     });
 // };
-
-function showPeepOnChangeUrl () {
-  console.log('f');
-}
-
 function displayPeepsList() {
   updateUrl('peeps');
 };
 
-// // showPeepOnChangeUrl();
+function showSinglePeep(peepId) {
+  var peepModal = document.getElementById('peep-modal');
+  router.getSinglePeep(peepId, peepModal)
+    .then(singlePeepHtml => {
+      if(peepModal === null){
+        app.innerHTML += singlePeepHtml;
+      } else {
+        peepModal.innerHTML = singlePeepHtml;
+      }
+      showModal();
+    });
+};
 
-// // function showPeepOnChangeUrl() {
-// //   window.addEventListener('hashchange', showClickedPeep);
-// // };
+function showModal () {
+  $('#peep-modal').modal('show');
+  closeSinglePeepModal();
+}
 
-// // function showClickedPeep() {
-// //   showSinglePeep(getPeepFromUrl(window.location));
-// // };
+function closeSinglePeepModal() {
+  $('#peep-modal').on('hidden.bs.modal', function () {
+    history.go(-1)
+    updateUrl('#peeps')
+  });
+}
 
-// // function getPeepFromUrl(location) {
-// //   return location.hash.split("#peeps/")[1];
-// // };
+// function showPeepOnChangeUrl() {
+//   window.addEventListener('hashchange', showClickedPeep);
+// };
 
-// // function showSinglePeep(peepId) {
-// //   var peepModal = document.getElementById('peepModal');
-// //   peepController.renderSinglePeep(parseInt(peepId), peepModal);
-// // };
+// function showClickedPeep() {
+//   showSinglePeep(getPeepFromUrl(window.location));
+// };
+
+// function getPeepFromUrl(location) {
+//   return location.hash.split("#peeps/")[1];
+// };
+
+// function showSinglePeep(peepId) {
+//   var peepModal = document.getElementById('peepModal');
+//    app.innerHTML = router.showSinglePeep(parseInt(peepId), peepModal);
+// };
