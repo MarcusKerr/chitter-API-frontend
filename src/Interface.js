@@ -88,24 +88,33 @@ function passwordMatch(inputsArray) {
 };
 
 function displayError(errorMsg) {
-  var errorMessageModal = document.getElementById('errorMsgModal');
-  if(errorMessageModal) {
-    errorMessageModal.innerHTML = router.displayError(errorMsg, true);
-  } else {
-    app.innerHTML += router.displayError(errorMsg);
-  }; 
-  showModal('errorMsgModal');
+  showModal(router.displayError(errorMsg), 'errorMsgModal');
 };
 
-function showModal (modalId) {
+function addModal(modalHtml) {
+  app.innerHTML += modalHtml;
+};
+
+function showModal (modalHtml, modalId) {
+  addModal(modalHtml);
   $(`#${modalId}`).modal('show');
-  closeModal(modalId, getUrlHash());
+  closeModal(modalId);
+};
+
+function closeModal(modalId) {
+  $(`#${modalId}`).on('hidden.bs.modal', function () {
+    if (modalId === 'errorMsgModal') { 
+      var hash = getUrlHash();
+      updateUrl('')
+      updateUrl(hash);
+    } else {
+      history.go(-1)
+    }
+  });
 };
 
 function getUrlHash () {
-  var urlHash = window.location.hash
-  if (urlHash.includes('/')) urlHash = urlHash.split('/')[0];
-  return urlHash.split('#')[1];
+  return window.location.hash.split('#')[1]
 };
 
 // function createNewUser(handle, password) {
@@ -124,18 +133,8 @@ function displayPeepsList() {
 };
 
 function showSinglePeep(peepId) {
-  var peepModal = document.getElementById('peep-modal');
-  router.getSinglePeep(peepId, peepModal)
+  router.getSinglePeep(peepId)
     .then(singlePeepHtml => {
-      peepModal ? peepModal.innerHTML = singlePeepHtml : app.innerHTML += singlePeepHtml;
-      showModal('peep-modal');
+      showModal(singlePeepHtml, 'peep-modal');
     });
-};
-
-function closeModal(modalId, url) {
-  $(`#${modalId}`).on('hidden.bs.modal', function () {
-    if (modalId === 'peep-modal') history.go(-1)
-    if (modalId === 'errorMsgModal') updateUrl('')
-    updateUrl(`${url}`);
-  });
 };

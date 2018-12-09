@@ -13,13 +13,12 @@
       });
   };
 
-  PeepsController.prototype.renderSinglePeep = function (peepId, peepModal) {
+  PeepsController.prototype.renderSinglePeep = function (peepId) {
       return this._findPeep(peepId)
         .then(peep => {
-          return new this.singlePeepView(peep).create(peepModal);
+          return new this.singlePeepView(peep).create();
         })
         .then(singlePeepHtml => {
-          // console.log(singlePeepHtml);
           return singlePeepHtml;
         });
   };

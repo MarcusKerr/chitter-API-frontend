@@ -18,9 +18,9 @@
     return this.signUpView.create();
   };
 
-  PagesController.prototype.renderErrorMessage = function(errorMsg, errorMsgModal = null) {
-    return new this.errorMessageView(errorMsg).create(errorMsgModal);
+  PagesController.prototype.renderErrorMessage = function(errorMsg) {
+    return new this.errorMessageView(errorMsg).create();
   };
-  
+
   exports.PagesController = PagesController;
 })(this);
