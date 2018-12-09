@@ -11,12 +11,12 @@
         if (response instanceof Error) {
           return false;
         } else {
-          return self.logInUser(handle, password)
+          return self.loginUser(handle, password)
         }
       });
   };
 
-  UsersController.prototype.logInUser = function(handle,password) {
+  UsersController.prototype.loginUser = function(handle,password) {
     self = this;
     return this.user.login(handle, password)
       .then(function(response){

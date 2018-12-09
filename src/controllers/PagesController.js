@@ -18,29 +18,9 @@
     return this.signUpView.create();
   };
 
-  // PagesController.prototype.renderPeepsList = function() {
-  //   return this.peepsController.renderPeepsList();
-  // };
-
   PagesController.prototype.renderErrorMessage = function(errorMsg, errorMsgModal = null) {
     return new this.errorMessageView(errorMsg).create(errorMsgModal);
   };
-
-  // PagesController.prototype.createNewUser = function(handle, password) {
-  //   return this.usersController.createNewUser(handle, password);
-  // };
-
-  // PagesController.prototype.logInUser = function(handle, password) {
-  //   return this.usersController.logInUser(handle, password);
-  // };
-
-  // PagesController.prototype.logOut = function() {
-  //   return this.usersController.logOut();
-  // };
-
-  // PagesController.prototype.inSession = function() {
-  //   return this.usersController.inSession();
-  // };
-
+  
   exports.PagesController = PagesController;
 })(this);

@@ -115,12 +115,9 @@ function getUrlHash () {
 //     });
 // };
 
-// function logInUser(handle, password) {
-//   mainController.logInUser(handle, password)
-//     .then(function(response){
-//       response === true ? displayPeepsList() : displayError('The details you enetered were incorrect');
-//     });
-// };
+function logInUser(handle, password) {
+  router.login(handle, password);
+};
 
 function displayPeepsList() {
   updateUrl('peeps');
