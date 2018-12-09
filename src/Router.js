@@ -12,7 +12,7 @@
 
   Router.prototype.matchRoute = function (hash) {
     if (hash.includes('#peeps/')){
-      return this.peepsController.renderSinglePeep(parseInt(hash.split('/')[1]), null);
+      return [this.routes['#peeps'][0], showSinglePeep];
     } 
     return this.routes[hash];
   };
@@ -23,7 +23,7 @@
 
   Router.prototype.getSinglePeep = function (peepId, peepModal) {
     return this.peepsController.renderSinglePeep(peepId, peepModal);
-  }
+  };
 
   exports.Router = Router;
 })(this);

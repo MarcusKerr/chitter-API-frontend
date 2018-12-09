@@ -5,21 +5,18 @@ window.addEventListener('hashchange', updatePage)
 updatePage();
 
 function updatePage () {
-  if(window.location.hash.includes('#peeps/')){
-    var rr = router.matchRoute('#peeps')
-    rr[0].then(res => { app.innerHTML = res })
-    showSinglePeep(parseInt(window.location.hash.split('/')[1]));
-  } else {
-    var routerRespone = router.matchRoute(window.location.hash)
-    if (window.location.hash === "#peeps") {
-      routerRespone[0].then(res => { app.innerHTML = res })
+    var routerRespone = router.matchRoute(window.location.hash);
+    if (window.location.hash.includes("#peeps")) {
+      routerRespone[0].then(res => { app.innerHTML = res });
     } else {
       app.innerHTML = routerRespone[0];
     }
     if (routerRespone.length > 1) {
+      if(window.location.hash.includes("#peeps/")){
+        return routerRespone[1](parseInt(window.location.hash.split('/')[1]));
+      }
       routerRespone[1]();
     }
-  }
 };
 
 function updateUrl(hash) {
@@ -136,11 +133,11 @@ function showSinglePeep(peepId) {
       } else {
         peepModal.innerHTML = singlePeepHtml;
       }
-      showModal();
+      showPeepModal();
     });
 };
 
-function showModal () {
+function showPeepModal () {
   $('#peep-modal').modal('show');
   closeSinglePeepModal();
 }
