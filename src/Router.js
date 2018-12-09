@@ -4,8 +4,8 @@
     this.peepsController = peepsController;
     this.routes = {
       '': [ pagesController.renderIndex(), setIndexButtons ],
-      '#log-in': [ pagesController.renderLogIn(), setFormButton ],
-      '#sign-up': [ pagesController.renderSignUp(), setFormButton ],
+      '#login': [ pagesController.renderLogIn(), setFormButton ],
+      '#signup': [ pagesController.renderSignUp(), setFormButton ],
       '#peeps': [ peepsController.renderPeepsList()],
     }
   }

@@ -25,87 +25,88 @@ function updateUrl(hash) {
 
 function setIndexButtons () {
   document.getElementById('log-in-btn').addEventListener("click", function() {
-    updateUrl('log-in');
+    updateUrl('login');
   });
 
   document.getElementById('sign-up-btn').addEventListener("click", function() {
-    updateUrl('sign-up');
+    updateUrl('signup');
   });
 };
 
 function setFormButton () {
-  var btn = document.getElementsByClassName('btn');
-  btn[0].disabled = false;
-  btn[0].addEventListener("click", function(e) {
+  var formBtn = document.getElementsByClassName('btn')[0];
+  document.getElementsByClassName('btn')[0].disabled = false;
+  formBtn.addEventListener("click", function(e) {
     e.preventDefault();
-    // verifyFormData();
-    displayPeepsList();
+    verifyFormData();
   });
 };
 
-// function verifyFormData() {
-//   document.getElementsByClassName('btn')[0].disabled = true;
-//   var inputsArray = document.getElementsByTagName('input');
-//   if (!allFieldsComplete(inputsArray)) {
-//     displayError('Please complete all fields');
-//   } else if (!validInput(inputsArray[0])) {
-//     displayError('Handle must begin with a letter');
-//   } else if (containsSpaces(inputsArray[0])) {
-//     displayError('Handle must not contain spaces');
-//   } else if (containsSpaces(inputsArray[1])) {
-//     displayError('Password must not contain spaces');
-//   } else if (inputsArray.length === 3) {
-//     if (!passwordMatch(inputsArray)) {
-//       displayError('Passwords must be the same');
-//     } else {
-//       createNewUser(inputsArray[0].value.toString(), inputsArray[1].value.toString());
-//     }
-//   } else {
-//     logInUser(inputsArray[0].value.toString(), inputsArray[1].value.toString());
-//   }
-// };
+function verifyFormData() {
+  document.getElementsByClassName('btn')[0].disabled = true;
+  var inputsArray = document.getElementsByTagName('input');
+  if (!allFieldsComplete(inputsArray)) {
+    displayError('Please complete all fields'); 
+  } else if (!validInput(inputsArray[0])) {
+    displayError('Handle must begin with a letter');
+  } else if (containsSpaces(inputsArray[0])) {
+    displayError('Handle must not contain spaces');
+  } else if (containsSpaces(inputsArray[1])) {
+    displayError('Password must not contain spaces');
+  } else if (inputsArray.length === 3) {
+    if (!passwordMatch(inputsArray)) {
+      displayError('Passwords must be the same');
+    } else {
+      createNewUser(inputsArray[0].value.toString(), inputsArray[1].value.toString());
+    }
+  } else {
+    logInUser(inputsArray[0].value.toString(), inputsArray[1].value.toString());
+  }
+};
 
-// function allFieldsComplete(inputsArray) {
-//   for (var i = 0; i < inputsArray.length; i ++) {
-//     if (inputsArray[i].value === "") return false;
-//   }
-//   return true;
-// };
+function allFieldsComplete(inputsArray) {
+  for (var i = 0; i < inputsArray.length; i ++) {
+    if (inputsArray[i].value === "") return false;
+  }
+  return true;
+};
 
-// function validInput(input) {
-//   var letters = /^[A-Za-z]+$/;
-//   if (input.value.toString()[0].match(letters)) return true;
-//   return false;
-// };
+function validInput(input) {
+  var letters = /^[A-Za-z]+$/;
+  if (input.value.toString()[0].match(letters)) return true;
+  return false;
+};
 
-// function containsSpaces(input) {
-//   if (input.value.toString().includes(" ")) return true;
-//   return false;
-// };
+function containsSpaces(input) {
+  if (input.value.toString().includes(" ")) return true;
+  return false;
+};
 
-// function passwordMatch(inputsArray) {
-//   if (inputsArray[1].value.toString() === inputsArray[2].value.toString()) return true;
-//   return false;
-// };
+function passwordMatch(inputsArray) {
+  if (inputsArray[1].value.toString() === inputsArray[2].value.toString()) return true;
+  return false;
+};
 
-// function displayError(errorMsg) {
-//   var errorMessageModal = document.getElementById('errorMsgModal');
-//   if(errorMessageModal) {
-//     errorMessageModal.innerHTML = router.displayError(errorMsg, true);
-//   } else {
-//     app.innerHTML += router.displayError(errorMsg);
-//   };
-//   $('#errorMsgModal').modal('show');
-//   resetForm();
-// };
+function displayError(errorMsg) {
+  var errorMessageModal = document.getElementById('errorMsgModal');
+  if(errorMessageModal) {
+    errorMessageModal.innerHTML = router.displayError(errorMsg, true);
+  } else {
+    app.innerHTML += router.displayError(errorMsg);
+  }; 
+  showModal('errorMsgModal');
+};
 
-// function resetForm() {
-//   var inputsArray = document.getElementsByTagName('input');
-//   for (var i = 0; i < inputsArray.length; i++) {
-//     inputsArray[i].value = "";
-//   }
-//   setFormButton();
-// };
+function showModal (modalId) {
+  $(`#${modalId}`).modal('show');
+  closeModal(modalId, getUrlHash());
+};
+
+function getUrlHash () {
+  var urlHash = window.location.hash
+  if (urlHash.includes('/')) urlHash = urlHash.split('/')[0];
+  return urlHash.split('#')[1];
+};
 
 // function createNewUser(handle, password) {
 //   mainController.createNewUser(handle, password)
@@ -120,6 +121,7 @@ function setFormButton () {
 //       response === true ? displayPeepsList() : displayError('The details you enetered were incorrect');
 //     });
 // };
+
 function displayPeepsList() {
   updateUrl('peeps');
 };
@@ -128,40 +130,15 @@ function showSinglePeep(peepId) {
   var peepModal = document.getElementById('peep-modal');
   router.getSinglePeep(peepId, peepModal)
     .then(singlePeepHtml => {
-      if(peepModal === null){
-        app.innerHTML += singlePeepHtml;
-      } else {
-        peepModal.innerHTML = singlePeepHtml;
-      }
-      showPeepModal();
+      peepModal ? peepModal.innerHTML = singlePeepHtml : app.innerHTML += singlePeepHtml;
+      showModal('peep-modal');
     });
 };
 
-function showPeepModal () {
-  $('#peep-modal').modal('show');
-  closeSinglePeepModal();
-}
-
-function closeSinglePeepModal() {
-  $('#peep-modal').on('hidden.bs.modal', function () {
-    history.go(-1)
-    updateUrl('#peeps')
+function closeModal(modalId, url) {
+  $(`#${modalId}`).on('hidden.bs.modal', function () {
+    if (modalId === 'peep-modal') history.go(-1)
+    if (modalId === 'errorMsgModal') updateUrl('')
+    updateUrl(`${url}`);
   });
-}
-
-// function showPeepOnChangeUrl() {
-//   window.addEventListener('hashchange', showClickedPeep);
-// };
-
-// function showClickedPeep() {
-//   showSinglePeep(getPeepFromUrl(window.location));
-// };
-
-// function getPeepFromUrl(location) {
-//   return location.hash.split("#peeps/")[1];
-// };
-
-// function showSinglePeep(peepId) {
-//   var peepModal = document.getElementById('peepModal');
-//    app.innerHTML = router.showSinglePeep(parseInt(peepId), peepModal);
-// };
+};
