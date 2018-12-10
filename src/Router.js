@@ -8,7 +8,7 @@
       '': [ pagesController.renderIndex(), setIndexButtons ],
       '#login': [ pagesController.renderLogIn(), setFormButton ],
       '#signup': [ pagesController.renderSignUp(), setFormButton ],
-      '#peeps': [ peepsController.renderPeepsList()],
+      '#peeps': [ peepsController.renderPeepsList(pagesController.renderNavBar(this._inSession()))],
     }
   }
 
@@ -32,7 +32,6 @@
       .then(response => {
         if (response === false) return displayError('The details you enetered were incorrect');
         this._startSession(response);
-        this._redirect('peeps');
       });
   };
 
@@ -41,17 +40,18 @@
       .then(response => {
         if (response === false) return displayError(`The handle ${handle} is already in use`);
         this._startSession(response);
-        this._redirect('peeps');
       });
   };
 
   Router.prototype._startSession = function (sessionData) {
     this.session.setItem('user_id', `${sessionData.user_id}`);
     this.session.setItem('session_key', `${sessionData.session_key}`);
+    this._redirect('peeps');
   }
 
   Router.prototype._endSession = function() {
     this.session.clear();
+    this._redirect('')
   };
 
   Router.prototype._inSession = function() {

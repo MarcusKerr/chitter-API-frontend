@@ -1,8 +1,9 @@
 (function(exports){
-  function PagesController (indexView = new IndexView(), signUpView = new SignUpView(), logInView = new LogInView(), errorMessageView = ErrorMessageView) {
+  function PagesController (indexView = new IndexView(), signUpView = new SignUpView(), logInView = new LogInView(),  navBarView = NavBarView, errorMessageView = ErrorMessageView) {
     this.indexView = indexView;
     this.signUpView = signUpView;
     this.logInView = logInView;
+    this.navBarView = navBarView;
     this.errorMessageView = errorMessageView;
   };
 
@@ -18,7 +19,11 @@
     return this.signUpView.create();
   };
 
-  PagesController.prototype.renderErrorMessage = function(errorMsg) {
+  PagesController.prototype.renderNavBar = function (inSession) {
+    return new this.navBarView(inSession).create();
+  };
+
+  PagesController.prototype.renderErrorMessage = function (errorMsg) {
     return new this.errorMessageView(errorMsg).create();
   };
 

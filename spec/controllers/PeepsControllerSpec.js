@@ -6,6 +6,7 @@ describe("PeepController", function() {
   var mockPeepsList;
   var mockPeepsListView;
   var mockSinglePeepView;
+  var mockNavBarHtml = '<div></div>';
   var peepId = 175;
   var peepModal = null;
 
@@ -27,8 +28,8 @@ describe("PeepController", function() {
 
   describe(".renderPeepsList", function() {
     it("delegates to peepListview", function() {
-      peepsController.renderPeepsList()
-      expect(mockPeepsListView.create).toHaveBeenCalled();
+      peepsController.renderPeepsList(mockNavBarHtml);
+      expect(mockPeepsListView.create).toHaveBeenCalledWith(mockNavBarHtml);
     });
   });
 

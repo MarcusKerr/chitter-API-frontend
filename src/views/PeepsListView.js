@@ -5,14 +5,14 @@
     this._peepsListHtml = [];
   };
 
-  PeepsListView.prototype.create = function () {
+  PeepsListView.prototype.create = function (navBar) {
     this._peepsListHtml = [];
     return this._peepsList.getPeeps()
       .then(peepJson => {
         peepJson.forEach((peep) => {
           this._peepsListHtml.push(this._formatPeep(peep));
         });
-        return `<ol id="peep-list" class="col-md-6 col-lg-4 mx-auto">${this._peepsListHtml.join('')}</ol>`;
+      return `${navBar}<ol id="peep-list" class="col-md-6 col-lg-4 mx-auto">${this._peepsListHtml.join('')}</ol>`;
       });
   };
 

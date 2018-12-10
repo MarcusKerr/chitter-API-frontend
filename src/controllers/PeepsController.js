@@ -6,8 +6,8 @@
     this.singlePeepView = singlePeepView;
   };
 
-  PeepsController.prototype.renderPeepsList = function () {
-    return this.peepsListView.create()
+  PeepsController.prototype.renderPeepsList = function (navBarHtml) {
+    return this.peepsListView.create(navBarHtml)
       .then(peepsHtml => {
         return peepsHtml;
       });
