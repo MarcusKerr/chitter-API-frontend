@@ -36,6 +36,15 @@
       });
   };
 
+  Router.prototype.createNewUser = function (handle, password) {
+    return this.usersController.createNewUser(handle, password)
+      .then(response => {
+        if (response === false) return displayError(`The handle ${handle} is already in use`);
+        this._startSession(response);
+        this._redirect('peeps');
+      });
+  };
+
   Router.prototype._startSession = function (sessionData) {
     this.session.setItem('user_id', `${sessionData.user_id}`);
     this.session.setItem('session_key', `${sessionData.session_key}`);
@@ -45,7 +54,7 @@
     this.session.clear();
   };
 
-  Router.prototype.inSession = function() {
+  Router.prototype._inSession = function() {
     if (this.session.length === 2) return true;
     return false;
   };

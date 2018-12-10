@@ -113,10 +113,52 @@ body {
 
 /* Nav bar */
 
-#nav-bar{
+#nav-bar {
   height: 45px;
   background-color: #fff;
 }
+
+.left-links .nav-item {
+  height: 45px;;
+  width: 60px;
+  text-align: center;
+}
+
+.left-links .nav-item:hover,
+.active-link-item {
+  border-bottom: 3px solid tomato;
+}
+
+.nav-link:hover,
+.active-link {
+  color: tomato !important;
+}
+
+.right-links .nav-item {
+  padding-left: 14px;
+}
+
+.nav-btn {
+  width: 75px;
+  background-color: #fff;
+  color: tomato !important;
+}
+
+.nav-btn:hover {
+  color: #fff !important;
+  background-color: tomato;
+}
+
+#peep-btn {
+  color: #fff !important;
+  background-color: tomato;
+}
+
+#peep-btn:hover {
+  background-color: #fff;
+  color: tomato !important;
+}
+
 
 /* Peeplist */
 

@@ -8,7 +8,7 @@
     return this.user.new(handle, password)
       .then(response => {
         if (response instanceof Error) return false;
-        return self.loginUser(handle, password);
+        return this.loginUser(handle, password);
       });
   };
 

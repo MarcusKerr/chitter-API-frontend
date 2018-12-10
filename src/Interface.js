@@ -117,15 +117,12 @@ function getUrlHash () {
   return window.location.hash.split('#')[1]
 };
 
-// function createNewUser(handle, password) {
-//   mainController.createNewUser(handle, password)
-//     .then(function(response){
-//       response === true ? displayPeepsList() : displayError(`The handle ${handle} is already in use`);
-//     });
-// };
-
 function logInUser(handle, password) {
   router.login(handle, password);
+};
+
+function createNewUser(handle, password) {
+  router.createNewUser(handle, password);
 };
 
 function displayPeepsList() {
