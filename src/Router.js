@@ -8,8 +8,8 @@
       '': [ pagesController.renderIndex(), setIndexButtons ],
       '#login': [ pagesController.renderLogIn(), setFormButton ],
       '#signup': [ pagesController.renderSignUp(), setFormButton ],
-      '#peeps': [ peepsController.renderPeepsList(pagesController.renderNavBar(this._inSession()))],
-    }
+      '#peeps': [ peepsController.renderPeepsList(pagesController.renderNavBar(this._inSession())), setNavBarButtons, this._inSession()],
+    };
   }
 
   Router.prototype.matchRoute = function (hash) {
@@ -62,7 +62,7 @@
 
   Router.prototype._endSession = function() {
     this.session.clear();
-    this._redirect('')
+    this._redirect('');
   };
 
   Router.prototype._inSession = function() {

@@ -1,8 +1,7 @@
 html,
 body {
   width: 100%;
-  height: 1000px;;
-  /* height: 100%; */
+  height: 100%;
   background-color: tomato;
 }
 
@@ -11,11 +10,12 @@ body {
   display: flex;
   height: 100%;
 }
+
 .main-divs {
   width: 50%;
 }
 
-#left{
+#left {
   background-image: url("../images/chitter_background.png");
 }
 
@@ -41,6 +41,18 @@ body {
   border: 1px solid tomato;
   color: tomato;
   padding: 0;
+}
+
+#sign-up-btn:hover,
+#confirm-sign-up-btn:hover,
+#confirm-log-in-btn:hover,
+#peep-btn:hover {
+  background-color:#d0513a;	
+}
+
+.nav-btn:hover,
+#log-in-btn:hover {
+  background-color: #ffe2dd;
 }
 
 #sign-up-btn {
@@ -72,7 +84,7 @@ body {
 }
 
 .sign-up-input > input,
-.log-in-input > input{
+.log-in-input > input {
   width: 280px;
   margin-bottom: 15px;
 }
@@ -145,21 +157,10 @@ body {
   color: tomato !important;
 }
 
-.nav-btn:hover {
-  color: #fff !important;
-  background-color: tomato;
-}
-
 #peep-btn {
   color: #fff !important;
   background-color: tomato;
 }
-
-#peep-btn:hover {
-  background-color: #fff;
-  color: tomato !important;
-}
-
 
 /* Peeplist */
 

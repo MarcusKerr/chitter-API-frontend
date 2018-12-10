@@ -31,7 +31,7 @@ describe("NavBarView", function() {
       expect(navBarView.create()).toEqual(`<nav id="nav-bar" class="navbar navbar-expand navbar-light fixed-top">
           <div class="container">
               <ul class="navbar-nav left-links">
-                <li class="nav-item active-link-item"><a class="nav-link active-link" href="">Home</a></li>
+                <li class="nav-item active-link-item"><a class="nav-link active-link" href="#peeps">Home</a></li>
               </ul>
               <ul class="navbar-nav right-links">
                 <li class="nav-item">

@@ -8,21 +8,24 @@ updatePage(getPageContent());
 
 function updatePage (pageContent) {
   if (window.location.hash.includes("#peeps")) {
-    pageContent[0].then(response => app.innerHTML = response);
+    pageContent[0]
+    .then(response => {
+      app.innerHTML = response;
+      callCallback(pageContent[1], pageContent[2]);
+    });
   } else {
     app.innerHTML = pageContent[0];
-  }
-  if (pageContent.length > 1) {
     callCallback(pageContent[1])
-  }
+  }  
 };
 
 function getPageContent () {
   return router.matchRoute(window.location.hash);
 };
 
-function callCallback(callbackFunction) {
-  if(window.location.hash.includes("#peeps/")) return callbackFunction(parseInt(window.location.hash.split('/')[1]));
+function callCallback(callbackFunction, param = null) {
+  if (param) return callbackFunction(param);
+  if (window.location.hash.includes("#peeps/")) return callbackFunction(parseInt(window.location.hash.split('/')[1]));
   callbackFunction();
 };
 
@@ -142,3 +145,12 @@ function showSinglePeep(peepId) {
       showModal(singlePeepHtml, 'peep-modal');
     });
 };
+
+function setNavBarButtons(inSession) {
+  if (inSession) {
+    var navButtons = document.getElementsByClassName('nav-btn');
+    navButtons[1].addEventListener("click", function() {
+      router.logout();
+    });
+  }
+}

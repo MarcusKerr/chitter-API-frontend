@@ -24,9 +24,9 @@
   NavBarView.prototype._setLinks = function () {
     if (this._inSession) {
       return [
-        `<li class="nav-item active-link-item"><a class="nav-link active-link" href="">Home</a></li>`,
-        `<a id="peep-btn" class="nav-link nav-btn btn" href="">Peep</a>`,
-        `<a class="nav-link nav-btn btn" href="">Log out</a>`]
+        `<li class="nav-item active-link-item"><a class="nav-link active-link" href="#peeps">Home</a></li>`,
+        `<a id="peep-btn" class="nav-link nav-btn btn">Peep</a>`,
+        `<a class="nav-link nav-btn btn">Log out</a>`]
     } 
     return [
       `<li class="nav-item"><a class="nav-link" href="">Home</a></li>`,
