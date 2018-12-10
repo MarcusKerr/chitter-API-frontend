@@ -13,10 +13,17 @@
   }
 
   Router.prototype.matchRoute = function (hash) {
+    // if (this._dontNeedThisPageBecauseLoggedIn(hash)) {
+    //   return this._redirect('peeps');
+    // }
     if (hash.includes('#peeps/')){
       return [this.routes['#peeps'][0], showSinglePeep];
     } 
     return this.routes[hash];
+  };
+
+  Router.prototype._dontNeedThisPageBecauseLoggedIn = function (hash) {
+    if(hash === '' || hash === '#login' || hash === '#signup') return this._inSession();
   };
 
   Router.prototype.displayError = function (errorMsg) {
@@ -33,6 +40,10 @@
         if (response === false) return displayError('The details you enetered were incorrect');
         this._startSession(response);
       });
+  };
+
+  Router.prototype.logout = function () {
+    this._endSession();
   };
 
   Router.prototype.createNewUser = function (handle, password) {

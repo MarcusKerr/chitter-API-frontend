@@ -1,22 +1,29 @@
 var app = document.getElementById('app');
 var router = new Router();
-window.addEventListener('hashchange', updatePage)
+window.addEventListener('hashchange', function() {
+  updatePage(getPageContent());
+});
 
-updatePage();
+updatePage(getPageContent());
 
-function updatePage () {
-    var routerRespone = router.matchRoute(window.location.hash);
-    if (window.location.hash.includes("#peeps")) {
-      routerRespone[0].then(res => { app.innerHTML = res });
-    } else {
-      app.innerHTML = routerRespone[0];
-    }
-    if (routerRespone.length > 1) {
-      if(window.location.hash.includes("#peeps/")){
-        return routerRespone[1](parseInt(window.location.hash.split('/')[1]));
-      }
-      routerRespone[1]();
-    }
+function updatePage (pageContent) {
+  if (window.location.hash.includes("#peeps")) {
+    pageContent[0].then(response => app.innerHTML = response);
+  } else {
+    app.innerHTML = pageContent[0];
+  }
+  if (pageContent.length > 1) {
+    callCallback(pageContent[1])
+  }
+};
+
+function getPageContent () {
+  return router.matchRoute(window.location.hash);
+};
+
+function callCallback(callbackFunction) {
+  if(window.location.hash.includes("#peeps/")) return callbackFunction(parseInt(window.location.hash.split('/')[1]));
+  callbackFunction();
 };
 
 function updateUrl(hash) {
