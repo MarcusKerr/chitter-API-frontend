@@ -5,46 +5,19 @@
   };
 
   UsersController.prototype.createNewUser = function(handle, password) {
-    self = this;
     return this.user.new(handle, password)
-      .then(function(response){
-        if (response instanceof Error) {
-          return false;
-        } else {
-          return self.loginUser(handle, password)
-        }
+      .then(response => {
+        if (response instanceof Error) return false;
+        return self.loginUser(handle, password);
       });
   };
 
   UsersController.prototype.loginUser = function(handle,password) {
-    self = this;
     return this.user.login(handle, password)
-      .then(function(response){
-        if (response instanceof Error) {
-          return false;
-        } else {
-          self._startSession(response);
-          return self.inSession();
-        }
+      .then(response => {
+        if (response instanceof Error) return false;
+        return response;
       });
-  };
-
-  UsersController.prototype.logOut = function() {
-    this._endSession();
-  };
-
-  UsersController.prototype._startSession = function(sessionData) {
-    this.session.setItem('user_id', `${sessionData.user_id}`);
-    this.session.setItem('session_key', `${sessionData.session_key}`);
-  };
-
-  UsersController.prototype._endSession = function() {
-    this.session.clear();
-  };
-
-  UsersController.prototype.inSession = function() {
-    if (this.session.length === 2) return true;
-    return false;
   };
 
   exports.UsersController = UsersController;

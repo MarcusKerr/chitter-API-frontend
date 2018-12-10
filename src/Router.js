@@ -3,6 +3,7 @@
     this.pagesController = pagesController;
     this.peepsController = peepsController;
     this.usersController = usersController;
+    this.session = localStorage;
     this.routes = {
       '': [ pagesController.renderIndex(), setIndexButtons ],
       '#login': [ pagesController.renderLogIn(), setFormButton ],
@@ -27,12 +28,26 @@
   };
 
   Router.prototype.login = function (handle, password) {
-    self = this;
     return this.usersController.loginUser(handle, password)
       .then(response => {
         if (response === false) return displayError('The details you enetered were incorrect');
+        this._startSession(response);
         this._redirect('peeps');
       });
+  };
+
+  Router.prototype._startSession = function (sessionData) {
+    this.session.setItem('user_id', `${sessionData.user_id}`);
+    this.session.setItem('session_key', `${sessionData.session_key}`);
+  }
+
+  Router.prototype._endSession = function() {
+    this.session.clear();
+  };
+
+  Router.prototype.inSession = function() {
+    if (this.session.length === 2) return true;
+    return false;
   };
 
   Router.prototype._redirect = function (hashUrl) {
