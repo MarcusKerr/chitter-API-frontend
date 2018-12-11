@@ -12,13 +12,12 @@ updatePage();
 function updatePage () {
   if (window.location.hash.includes("#peeps")) {
     pageContent[0]
-    .then( peepListHtml => {
+    .then(peepListHtml => {
       app.innerHTML = peepListHtml;
+    })
+    .then(res => {
       if(window.location.hash.includes("peeps/")) {
-        pageContent[1]
-        .then( singlePeepHtml => {
-          showModal(singlePeepHtml, 'peep-modal')
-        })
+        pageContent[1].then( singlePeepHtml => showModal(singlePeepHtml, 'peep-modal'))
       } else {
         callCallback(pageContent[1], pageContent[2]);
       }
