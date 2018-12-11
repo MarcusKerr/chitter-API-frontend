@@ -1,12 +1,15 @@
 var app = document.getElementById('app');
 var router = new Router();
+var pageContent;
 window.addEventListener('hashchange', function() {
-  updatePage(getPageContent());
+  getPageContent();
+  if (pageContent) updatePage();
 });
 
-updatePage(getPageContent());
+getPageContent();
+updatePage();
 
-function updatePage (pageContent) {
+function updatePage () {
   if (window.location.hash.includes("#peeps")) {
     pageContent[0]
     .then( peepListHtml => {
@@ -27,7 +30,7 @@ function updatePage (pageContent) {
 };
 
 function getPageContent () {
-  return router.matchRoute(window.location.hash);
+  pageContent = router.matchRoute(window.location.hash);
 };
 
 function callCallback(callbackFunction, param = null) {
