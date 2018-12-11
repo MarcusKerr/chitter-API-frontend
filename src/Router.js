@@ -3,7 +3,7 @@
     this.pagesController = pagesController;
     this.peepsController = peepsController;
     this.usersController = usersController;
-    this.session = localStorage;
+    // this.session = localStorage;
     this.routes = {
       '': [ pagesController.renderIndex(), setIndexButtons ],
       '#login': [ pagesController.renderLogIn(), setFormButton ],
@@ -54,9 +54,9 @@
       });
   };
 
-  Router.prototype._startSession = function (sessionData) {
-    this.session.setItem('user_id', `${sessionData.user_id}`);
-    this.session.setItem('session_key', `${sessionData.session_key}`);
+  Router.prototype._startSession = function (handl, password) {
+    // this.session.setItem('user_id', `${sessionData.user_id}`);
+    // this.session.setItem('session_key', `${sessionData.session_key}`);
     this._redirect('peeps');
   };
 
