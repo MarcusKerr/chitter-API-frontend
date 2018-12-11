@@ -13,11 +13,14 @@
       });
   };
 
-  Client.prototype.post = function(path, data) {
+  Client.prototype.post = function(path, data, sessionKey = null) {
+    var headers = new Headers()
+    if (path === '/peeps') headers.append("Authorization", sessionKey)
+    headers.append("Content-Type", 'application/json')
     return fetch(this._url + path, {
       method: 'POST',
       body: JSON.stringify(data),
-      headers:{'Content-Type': 'application/json'}
+      headers: headers
     })
     .then(function (response){
       if(response.status === 201) {
