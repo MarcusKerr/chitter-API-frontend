@@ -35,10 +35,10 @@ describe("NavBarView", function() {
               </ul>
               <ul class="navbar-nav right-links">
                 <li class="nav-item">
-                  <a id="peep-btn" class="nav-link nav-btn btn" href="">Peep</a>
+                  <a id="peep-btn" class="nav-link nav-btn btn">Peep</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link nav-btn btn" href="">Log out</a>
+                  <a class="nav-link nav-btn btn">Log out</a>
                 </li>
               </ul>
           </div>

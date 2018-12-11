@@ -7,11 +7,20 @@ window.addEventListener('hashchange', function() {
 updatePage(getPageContent());
 
 function updatePage (pageContent) {
-  if (window.location.hash.includes("#peeps")) {
+  if (window.location.hash === "#peeps") {
     pageContent[0]
-    .then(response => {
-      app.innerHTML = response;
+    .then( peepListHtml => {
+      app.innerHTML = peepListHtml;
       callCallback(pageContent[1], pageContent[2]);
+    });
+  } else if (window.location.hash.includes('#peeps/')) {
+    pageContent[1]
+    .then(singlePeepHtml => {
+      showModal(singlePeepHtml, 'peep-modal');
+    });
+    pageContent[0]
+     .then( peepListHtml => {
+      app.innerHTML = peepListHtml;
     });
   } else {
     app.innerHTML = pageContent[0];
@@ -25,6 +34,7 @@ function getPageContent () {
 
 function callCallback(callbackFunction, param = null) {
   if (param) return callbackFunction(param);
+  if (window.location.hash.includes("#peeps/")) return callbackFunction(parseInt(window.location.hash.split('/')[1]));
   if (window.location.hash.includes("#peeps/")) return callbackFunction(parseInt(window.location.hash.split('/')[1]));
   callbackFunction();
 };
@@ -137,13 +147,6 @@ function createNewUser(handle, password) {
 
 function displayPeepsList() {
   updateUrl('peeps');
-};
-
-function showSinglePeep(peepId) {
-  router.getSinglePeep(peepId)
-    .then(singlePeepHtml => {
-      showModal(singlePeepHtml, 'peep-modal');
-    });
 };
 
 function setNavBarButtons(inSession) {

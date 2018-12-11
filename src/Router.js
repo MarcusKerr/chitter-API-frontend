@@ -7,8 +7,7 @@
     this.routes = {
       '': [ pagesController.renderIndex(), setIndexButtons ],
       '#login': [ pagesController.renderLogIn(), setFormButton ],
-      '#signup': [ pagesController.renderSignUp(), setFormButton ],
-      '#peeps': [ peepsController.renderPeepsList(pagesController.renderNavBar(this._inSession())), setNavBarButtons, this._inSession()],
+      '#signup': [ pagesController.renderSignUp(), setFormButton ]
     };
   }
 
@@ -16,21 +15,24 @@
     // if (this._dontNeedThisPageBecauseLoggedIn(hash)) {
     //   return this._redirect('peeps');
     // }
-    if (hash.includes('#peeps/')){
-      return [this.routes['#peeps'][0], showSinglePeep];
-    } 
+    if (hash === '#peeps') return [ this._getPeepsList(), setNavBarButtons, this._inSession() ]
+    if (hash.includes('#peeps/')) return [ this._getPeepsList(), this._getSinglePeep(parseInt(window.location.hash.split('/')[1])) ];
     return this.routes[hash];
   };
 
-  Router.prototype._dontNeedThisPageBecauseLoggedIn = function (hash) {
-    if(hash === '' || hash === '#login' || hash === '#signup') return this._inSession();
+  // Router.prototype._dontNeedThisPageBecauseLoggedIn = function (hash) {
+  //   if(hash === '' || hash === '#login' || hash === '#signup') return this._inSession();
+  // };
+
+  Router.prototype._getPeepsList = function () {
+    return this.peepsController.renderPeepsList(this.pagesController.renderNavBar(this._inSession()))
   };
 
   Router.prototype.displayError = function (errorMsg) {
     return this.pagesController.renderErrorMessage (errorMsg);
   };
 
-  Router.prototype.getSinglePeep = function (peepId) {
+  Router.prototype._getSinglePeep = function (peepId) {
     return this.peepsController.renderSinglePeep(peepId);
   };
 
