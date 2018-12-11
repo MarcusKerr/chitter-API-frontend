@@ -7,20 +7,18 @@ window.addEventListener('hashchange', function() {
 updatePage(getPageContent());
 
 function updatePage (pageContent) {
-  if (window.location.hash === "#peeps") {
+  if (window.location.hash.includes("#peeps")) {
     pageContent[0]
     .then( peepListHtml => {
       app.innerHTML = peepListHtml;
-      callCallback(pageContent[1], pageContent[2]);
-    });
-  } else if (window.location.hash.includes('#peeps/')) {
-    pageContent[1]
-    .then(singlePeepHtml => {
-      showModal(singlePeepHtml, 'peep-modal');
-    });
-    pageContent[0]
-     .then( peepListHtml => {
-      app.innerHTML = peepListHtml;
+      if(window.location.hash.includes("peeps/")) {
+        pageContent[1]
+        .then( singlePeepHtml => {
+          showModal(singlePeepHtml, 'peep-modal')
+        })
+      } else {
+        callCallback(pageContent[1], pageContent[2]);
+      }
     });
   } else {
     app.innerHTML = pageContent[0];
