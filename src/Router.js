@@ -1,8 +1,9 @@
 (function(exports){
-  function Router(pagesController = new PagesController(), peepsController = new PeepsController(), usersController = new UsersController()) {
+  function Router(client = new Client, pagesController = new PagesController(), peepsController = new PeepsController(client), usersController = new UsersController(client), sessionsController = new SessionsController(client)) {
     this.pagesController = pagesController;
     this.peepsController = peepsController;
     this.usersController = usersController;
+    this.sessionsController = sessionsController;
     this.routes = {
       '': [ pagesController.renderIndex(), setIndexButtons ],
       '#login': [ pagesController.renderLogIn(), setFormButton ],
@@ -54,17 +55,17 @@
   };
 
   Router.prototype._startSession = function (handle, password) {
-    // this.sessionController.startSession(handle, password)
+    this.sessionsController.startSession(handle, password)
     this._redirect('peeps');
   };
 
   Router.prototype._endSession = function() {
-    // this.sessionController.endSession();
+    this.sessionsController.endSession();
     this._redirect('');
   };
 
   Router.prototype._isInSession = function() {
-    // return this.sessionController.isInSession()
+    return this.sessionsController.isInSession()
   };
 
   Router.prototype._redirect = function (hashUrl) {

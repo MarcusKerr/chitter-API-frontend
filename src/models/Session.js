@@ -1,5 +1,5 @@
 (function(exports){
-  function Session (client = new Client) {
+  function Session (client) {
     this._client = client;
     this._sessionData = {};
   };

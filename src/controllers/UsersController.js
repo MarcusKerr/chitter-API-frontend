@@ -1,5 +1,5 @@
 (function(exports) {
-  function UsersController (user = new User(), localStorage = window.localStorage) {
+  function UsersController (client, user = new User(client), localStorage = window.localStorage) {
     this.user = user;
     this.session = localStorage;
   };

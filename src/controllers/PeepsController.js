@@ -1,5 +1,5 @@
 (function (exports) {
-  function PeepsController (client = new Client(), peepsList = new PeepsList(client), peepsListView = new PeepsListView(peepsList), singlePeepView = SinglePeepView) {
+  function PeepsController (client, peepsList = new PeepsList(client), peepsListView = new PeepsListView(peepsList), singlePeepView = SinglePeepView) {
     this.client = client;
     this.peepsList = peepsList;
     this.peepsListView = peepsListView;
