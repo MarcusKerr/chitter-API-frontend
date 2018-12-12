@@ -8,18 +8,18 @@ describe("PagesController", function() {
   var mockSignUpView;
   var mockLogInView;
   var mockNavBarView
-  var mockNewPeepView;
   var mockErrorMessageView;
+  var mockNewPeepView;
 
   beforeEach(function() {
     mockIndexView = jasmine.createSpyObj('mockIndexView', ['create']);
     mockSignUpView = jasmine.createSpyObj('mockSignUpView', ['create']);
     mockLogInView = jasmine.createSpyObj('mockLogInView', ['create']);
     mockNavBarView = jasmine.createSpyObj('mockNavBarView', ['create']);
-    mockNewPeepView = jasmine.createSpyObj('mockNewPeepView', ['create']);
     mockErrorMessageView = jasmine.createSpyObj('mockErrorMessageView', ['create']);
+    mockNewPeepView = jasmine.createSpyObj('mockNewPeepView', ['create']);
 
-    pagesController = new PagesController(mockIndexView, mockSignUpView, mockLogInView, mockNavBarView, mockNewPeepView, mockErrorMessageView);
+    pagesController = new PagesController(mockIndexView, mockSignUpView, mockLogInView, mockNavBarView, mockErrorMessageView, mockNewPeepView);
   });
 
   describe(".renderIndex", function() {
@@ -49,9 +49,11 @@ describe("PagesController", function() {
   //   })
   // });
 
-  describe("renderNewPeepView", function() {
-    pagesController.renderNewPeepView();
-    expect(mockNewPeepView.create).toHaveBeenCalled();
+  describe(".renderNewPeepView", function() {
+    it("delegates to new peep view", function(){
+      pagesController.renderNewPeepView();
+      expect(mockNewPeepView.create).toHaveBeenCalled();
+    });
   });
 
   // describe(".renderErrorMessage", function() {
