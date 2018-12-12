@@ -1,7 +1,11 @@
 (function(exports){
-  function Session (client = new Client, sessionStorage = localStorage) {
+  function Session (client = new Client) {
     this._client = client;
-    this._session = sessionStorage;
+    this._sessionData = {};
+  };
+
+  Session.prototype.isInSession = function() {
+    return JSON.stringify(this._sessionData) === "{}" ? false : true;
   };
 
   Session.prototype.start = function (handle, password) {
@@ -10,13 +14,17 @@
         handle,
         password
       }
-    })
-    .then(sessionData => {
-      this._session.setItem('user_id', `${sessionData.user_id}`);
-      this._session.setItem('session_key', `${sessionData.session_key}`);
-      console.log(this._session)
-    });
+    }).then(sessionData => this._setSession(sessionData));
   }
+
+  Session.prototype._setSession = function (sessionData) {
+    this._sessionData['user_id'] = `${sessionData.user_id}`;
+    this._sessionData['session_key'] = `${sessionData.session_key}`;
+  };
+
+  Session.prototype.end = function () {
+    this._sessionData ={};
+  };
 
   exports.Session = Session;
 })(this);

@@ -14,16 +14,16 @@
   };
 
   Client.prototype.post = function(path, data, sessionKey = null) {
-    var headers = new Headers()
-    if (path === '/peeps') headers.append("Authorization", sessionKey)
-    headers.append("Content-Type", 'application/json')
+    var headers = new Headers({"Content-Type": "application/json"});
+    if (path === '/peeps') headers.append("Authorization", `Token token=${sessionKey}`)
+    console.log(headers.get("Authorization"))
     return fetch(this._url + path, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: headers
     })
     .then(function (response){
-      if(response.status === 201) {
+      if(response.ok) {
         return response.json();
       } else {
         throw new Error('There was an error posting to the API.');
