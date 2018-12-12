@@ -8,13 +8,14 @@
     return JSON.stringify(this._sessionData) === "{}" ? false : true;
   };
 
-  Session.prototype.start = function (handle, password) {
+  Session.prototype.startSession = function (handle, password) {
     return this._client.post('/sessions', {
       "session": {
         handle,
         password
       }
-    }).then(sessionData => this._setSession(sessionData));
+    }).then(sessionData => {
+      this._setSession(sessionData)});
   }
 
   Session.prototype._setSession = function (sessionData) {

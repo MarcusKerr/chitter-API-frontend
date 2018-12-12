@@ -1,6 +1,6 @@
 (function(exports){
   function SessionsController (client, session = new Session(client)) {
-    this._session = session
+    this._session = session;
   };
 
   SessionsController.prototype.isInSession = function () {
@@ -8,7 +8,7 @@
   };
 
   SessionsController.prototype.startSession = function (handle, password) {
-    return this._session.start(handle, password);
+    return this._session.startSession(handle, password);
   };
 
   SessionsController.prototype.endSession = function () {

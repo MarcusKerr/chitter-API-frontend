@@ -3,6 +3,7 @@ describe("PeepController", function() {
   var PeepsController = require("../../src/controllers/PeepsController").PeepsController;
   var peepsController;
   var mockClient;
+  var mockPeep;
   var mockPeepsList;
   var mockPeepsListView;
   var mockSinglePeepView;
@@ -12,6 +13,7 @@ describe("PeepController", function() {
 
   beforeEach(function() {
     mockClient = jasmine.createSpyObj('mockClient', ['connect']);
+    mockPeep = jasmine.createSpyObj('mockPeep', ['new']);
     mockPeepsList = jasmine.createSpyObj('mockPeepsList', ['getPeeps']);
 
     mockPeepsListView = jasmine.createSpyObj('mockPeepsListView', ['create']);
@@ -23,7 +25,14 @@ describe("PeepController", function() {
     mockSinglePeepView.create.and.callFake(function() {
       return Promise.resolve('<div><p>Single Peep</p></div>')
     });
-    peepsController = new PeepsController(mockClient, mockPeepsList, mockPeepsListView, mockSinglePeepView);
+    peepsController = new PeepsController(mockClient, mockPeep, mockPeepsList, mockPeepsListView, mockSinglePeepView);
+  });
+
+  describe(".newPeep", function() {
+    it("delegats to the peep model", function() {
+      peepsController.newPeep();
+      expect(mockPeep.new).toHaveBeenCalled();
+    });
   });
 
   describe(".renderPeepsList", function() {

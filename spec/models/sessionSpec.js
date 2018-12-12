@@ -29,7 +29,7 @@ describe("Session", function() {
 
   describe(".end", function() {
     it("ends the session", function(){
-      session.start(handle, password);
+      session.startSession(handle, password);
       session.end();
       expect(session.isInSession()).toBe(false)
     });
