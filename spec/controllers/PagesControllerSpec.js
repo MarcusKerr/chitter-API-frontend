@@ -8,6 +8,7 @@ describe("PagesController", function() {
   var mockSignUpView;
   var mockLogInView;
   var mockNavBarView
+  var mockNewPeepView;
   var mockErrorMessageView;
 
   beforeEach(function() {
@@ -15,9 +16,10 @@ describe("PagesController", function() {
     mockSignUpView = jasmine.createSpyObj('mockSignUpView', ['create']);
     mockLogInView = jasmine.createSpyObj('mockLogInView', ['create']);
     mockNavBarView = jasmine.createSpyObj('mockNavBarView', ['create']);
+    mockNewPeepView = jasmine.createSpyObj('mockNewPeepView', ['create']);
     mockErrorMessageView = jasmine.createSpyObj('mockErrorMessageView', ['create']);
 
-    pagesController = new PagesController(mockIndexView, mockSignUpView, mockLogInView, mockNavBarView, mockErrorMessageView);
+    pagesController = new PagesController(mockIndexView, mockSignUpView, mockLogInView, mockNavBarView, mockNewPeepView, mockErrorMessageView);
   });
 
   describe(".renderIndex", function() {
@@ -43,9 +45,14 @@ describe("PagesController", function() {
 
   // describe(".renderNavBar", function() {
   //   it("delegates to navbar view", function() {
-
+      
   //   })
   // });
+
+  describe("renderNewPeepView", function() {
+    pagesController.renderNewPeepView();
+    expect(mockNewPeepView.create).toHaveBeenCalled();
+  });
 
   // describe(".renderErrorMessage", function() {
   //   it("delegates to error message view", function() {
