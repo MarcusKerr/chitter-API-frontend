@@ -1,8 +1,10 @@
 'use strict';
 
 describe("SessionsController", function(){
-  const SessionController = require("../../src/controllers/SessionsController").SessionsController;
+  const SessionsController = require("../../src/controllers/SessionsController").SessionsController;
   var sessionsController;
+  var handle = 'marcus';
+  var password = 'mypassword';
   var mockClient;
   var mockSessionModel;
 
@@ -13,19 +15,21 @@ describe("SessionsController", function(){
 
   describe(".isInSession", function() {
     it("delegates to session model", function () {
-      sessionsController.startSession();
+      sessionsController.isInSession();
       expect(mockSessionModel.isInSession).toHaveBeenCalled();
     });
   });
+
   describe(".startSession", function() {
     it("delegates to session model", function () {
-      sessionsController.startSession();
-      expect(mockSessionModel.start).toHaveBeenCalled();
+      sessionsController.startSession(handle, password);
+      expect(mockSessionModel.start).toHaveBeenCalledWith(handle, password);
     });
   });
+
   describe(".endSession", function() {
     it("delegates to session model", function () {
-      sessionsController.startSession();
+      sessionsController.endSession();
       expect(mockSessionModel.end).toHaveBeenCalled();
     });
   });
