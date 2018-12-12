@@ -65,7 +65,7 @@
   };
 
   Router.prototype._isInSession = function() {
-    return this.sessionsController.isInSession()
+    return this.sessionsController.isInSession();
   };
 
   Router.prototype._redirect = function (hashUrl) {

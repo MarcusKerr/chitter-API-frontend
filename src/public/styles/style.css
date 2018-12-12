@@ -46,7 +46,8 @@ body {
 #sign-up-btn:hover,
 #confirm-sign-up-btn:hover,
 #confirm-log-in-btn:hover,
-#peep-btn:hover {
+#peep-btn:hover,
+#composePeep:hover {
   background-color:#d0513a;	
 }
 
@@ -192,6 +193,37 @@ body {
 .likes-container:hover {
   color: tomato;
   cursor: pointer;
+}
+
+/* Compose peep modal */
+
+#peepModalTitle {
+  margin: 0 auto;
+}
+
+#peepModal .modal-body {
+  background-color: #ffe2dd;
+  padding-bottom: 1px;
+}
+
+#peepTextArea {
+  height: 85px;
+  border: 2px solid #ffa99a;
+  border-radius: .5rem;
+}
+
+#peepModal .modal-footer {
+  border-top: none;
+  border-bottom-left-radius: .3rem;
+  border-bottom-right-radius: .3rem;
+  padding-top: 0;
+  background-color: #ffe2dd;
+}
+
+#composePeep {
+  color: #fff;
+  background-color: tomato;
+  width: 75px;
 }
 
 /* Single peep modal */

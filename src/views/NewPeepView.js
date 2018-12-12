@@ -1,12 +1,10 @@
-'use strict';
+(function(exports){
+  function NewPeepView () {
 
-describe("NewPeepView", function(){
-  const NewPeepView = require("../../src/views/NewPeepView").NewPeepView;
-  var newPeepView = new NewPeepView();
+  }
 
-  describe(".create", function(){
-    it("return Html for new peep modal", function(){
-      expect(newPeepView.create()).toEqual(`<div class="modal fade" id="peepModal" tabindex="-1" role="dialog">
+  NewPeepView.prototype.create = function () {
+    return `<div class="modal fade" id="peepModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -22,7 +20,8 @@ describe("NewPeepView", function(){
             </div>
           </div>
         </div>
-      </div>`);
-    });
-  });
-});
+      </div>`;
+  }
+
+  exports.NewPeepView = NewPeepView;
+})(this);
