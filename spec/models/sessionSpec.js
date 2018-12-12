@@ -30,7 +30,6 @@ describe("Session", function() {
   describe(".end", function() {
     it("ends the session", function(){
       session.start(handle, password);
-      console.log(session._sessionData)
       session.end();
       expect(session.isInSession()).toBe(false)
     });

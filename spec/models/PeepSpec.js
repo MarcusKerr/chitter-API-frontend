@@ -1,7 +1,6 @@
 // 'use strict';
 // describe("Peep", function() {
 //   const Peep = require("../../src/models/Peep").Peep;
-//   const PeepData = require('../helpers/PeepData.json');
 //   const mockSession = require('../helpers/mockSession.json');
 //   var peep;
 //   var mockClient;
