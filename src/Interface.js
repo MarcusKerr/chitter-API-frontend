@@ -16,7 +16,9 @@ function updatePage () {
       app.innerHTML = peepListHtml;
     })
     .then(res => {
-      if(window.location.hash.includes("peeps/")) {
+      if(window.location.hash === "#peeps/new") {
+        console.log('new')
+      } else if(window.location.hash.includes("peeps/")) {
         pageContent[1].then( singlePeepHtml => showModal(singlePeepHtml, 'peep-modal'))
       } else {
         callCallback(pageContent[1], pageContent[2]);
@@ -152,6 +154,9 @@ function displayPeepsList() {
 function setNavBarButtons(inSession) {
   if (inSession) {
     var navButtons = document.getElementsByClassName('nav-btn');
+    navButtons[0].addEventListener("click", function() {
+      updateUrl('peeps/new');
+    });
     navButtons[1].addEventListener("click", function() {
       router.logout();
     });

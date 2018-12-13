@@ -7,6 +7,7 @@ describe("PeepController", function() {
   var mockPeepsList;
   var mockPeepsListView;
   var mockSinglePeepView;
+  // var mockComposePeepView;
   var mockNavBarHtml = '<div></div>';
   var peepId = 175;
   var peepModal = null;
@@ -25,6 +26,7 @@ describe("PeepController", function() {
     mockSinglePeepView.create.and.callFake(function() {
       return Promise.resolve('<div><p>Single Peep</p></div>')
     });
+    // mockComposePeepView = jasmine.createSpyObj('mockComposePeepView', ['create']);
     peepsController = new PeepsController(mockClient, mockPeep, mockPeepsList, mockPeepsListView, mockSinglePeepView);
   });
 
