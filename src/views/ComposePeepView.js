@@ -1,9 +1,9 @@
 (function(exports){
-  function ComposeNewPeepView () {
+  function ComposePeepView () {
 
   }
 
-  ComposeNewPeepView.prototype.create = function () {
+  ComposePeepView.prototype.create = function () {
     return `<div class="modal fade" id="composePeepModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -23,5 +23,5 @@
       </div>`;
   }
 
-  exports.ComposeNewPeepView = ComposeNewPeepView;
+  exports.ComposePeepView = ComposePeepView;
 })(this);

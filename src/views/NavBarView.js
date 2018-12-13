@@ -1,11 +1,10 @@
 (function(exports){
-  function NavBarView (inSession) {
-    this._inSession = inSession;
+  function NavBarView () {
     this._links = [];
   };
 
-  NavBarView.prototype.create = function () {
-    this._setLinks();
+  NavBarView.prototype.create = function (isInSession) {
+    this._setLinks(isInSession);
     return `<nav id="nav-bar" class="navbar navbar-expand navbar-light fixed-top">
           <div class="container">
               <ul class="navbar-nav left-links">
@@ -23,8 +22,8 @@
         </nav>`;
   };
 
-  NavBarView.prototype._setLinks = function () {
-    if (this._inSession) {
+  NavBarView.prototype._setLinks = function (isInSession) {
+    if (isInSession) {
       return this._links = [
         `<li class="nav-item active-link-item"><a class="nav-link active-link" href="#peeps">Home</a></li>`,
         `<a id="peep-btn" class="nav-link nav-btn btn">Peep</a>`,

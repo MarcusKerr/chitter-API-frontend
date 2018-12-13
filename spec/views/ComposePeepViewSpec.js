@@ -1,12 +1,12 @@
 'use strict';
 
-describe("ComposeNewPeepView", function(){
-  const ComposeNewPeepView = require("../../src/views/ComposeNewPeepView").ComposeNewPeepView;
-  var composeNewPeepView = new ComposeNewPeepView();
+describe("ComposePeepView", function(){
+  const ComposePeepView = require("../../src/views/ComposePeepView").ComposePeepView;
+  var composePeepView = new ComposePeepView();
 
   describe(".create", function(){
     it("return Html for new peep modal", function(){
-      expect(composeNewPeepView.create()).toEqual(`<div class="modal fade" id="composePeepModal" tabindex="-1" role="dialog">
+      expect(composePeepView.create()).toEqual(`<div class="modal fade" id="composePeepModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">

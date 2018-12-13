@@ -1,7 +1,9 @@
 var app = document.getElementById('app');
 var router = new Router();
+var currentHash = window.location.hash;
 var pageContent;
 window.addEventListener('hashchange', function() {
+  currentHash = window.location.hash;
   getPageContent();
   if (pageContent) updatePage();
 });
@@ -10,20 +12,13 @@ getPageContent();
 updatePage();
 
 function updatePage () {
-  if (window.location.hash.includes("#peeps")) {
+  if (currentHash.includes("#peeps")) {
     pageContent[0]
-    .then(peepListHtml => {
-      app.innerHTML = peepListHtml;
-    })
+    .then(peepListHtml => app.innerHTML = peepListHtml )
     .then(res => {
-      if(window.location.hash === "#peeps/new") {
-        console.log('new')
-      } else if(window.location.hash.includes("peeps/")) {
-        pageContent[1].then( singlePeepHtml => showModal(singlePeepHtml, 'peep-modal'))
-      } else {
-        callCallback(pageContent[1], pageContent[2]);
-      }
-    });
+      if(hashIsPeepId()) return pageContent[1].then(singlePeepHtml => callCallback(pageContent[2], singlePeepHtml));
+      callCallback(pageContent[1], pageContent[2])
+    })
   } else {
     app.innerHTML = pageContent[0];
     callCallback(pageContent[1])
@@ -31,13 +26,15 @@ function updatePage () {
 };
 
 function getPageContent () {
-  pageContent = router.matchRoute(window.location.hash);
+  pageContent = router.matchRoute(currentHash);
 };
+
+function hashIsPeepId () {
+  return Number.isInteger(parseInt(currentHash.split('/')[1]));
+}
 
 function callCallback(callbackFunction, param = null) {
   if (param) return callbackFunction(param);
-  if (window.location.hash.includes("#peeps/")) return callbackFunction(parseInt(window.location.hash.split('/')[1]));
-  if (window.location.hash.includes("#peeps/")) return callbackFunction(parseInt(window.location.hash.split('/')[1]));
   callbackFunction();
 };
 
@@ -117,15 +114,15 @@ function addModal(modalHtml) {
   app.innerHTML += modalHtml;
 };
 
-function showModal (modalHtml, modalId) {
+function showModal (modalHtml) {
   addModal(modalHtml);
-  $(`#${modalId}`).modal('show');
-  closeModal(modalId);
+  $('.modal').modal('show');
+  closeModal();
 };
 
-function closeModal(modalId) {
-  $(`#${modalId}`).on('hidden.bs.modal', function () {
-    if (modalId === 'errorMsgModal') { 
+function closeModal() {
+  $('.modal').on('hidden.bs.modal', function () {
+    if (document.getElementById('errorMsgModal')) { 
       var hash = getUrlHash();
       updateUrl('')
       updateUrl(hash);
@@ -136,7 +133,7 @@ function closeModal(modalId) {
 };
 
 function getUrlHash () {
-  return window.location.hash.split('#')[1]
+  return currentHash.split('#')[1]
 };
 
 function logInUser(handle, password) {
@@ -160,5 +157,5 @@ function setNavBarButtons(inSession) {
     navButtons[1].addEventListener("click", function() {
       router.logout();
     });
-  }
-}
+  };
+};

@@ -4,11 +4,14 @@ describe("NavBarView", function() {
   var navBarView;
   var mockSession;
 
-  describe("create", function(){
+  beforeEach(function(){
+    navBarView = new NavBarView();
+  });
+
+  describe(".create", function(){
     it("returns for when there is no session", function(){
       mockSession = false
-      navBarView = new NavBarView(mockSession);
-      expect(navBarView.create()).toEqual(`<nav id="nav-bar" class="navbar navbar-expand navbar-light fixed-top">
+      expect(navBarView.create(mockSession)).toEqual(`<nav id="nav-bar" class="navbar navbar-expand navbar-light fixed-top">
           <div class="container">
               <ul class="navbar-nav left-links">
                 <li class="nav-item"><a class="nav-link" href="">Home</a></li>
@@ -27,8 +30,7 @@ describe("NavBarView", function() {
 
     it("returns html when in session ", function(){
       mockSession = true;
-      navBarView = new NavBarView(mockSession);
-      expect(navBarView.create()).toEqual(`<nav id="nav-bar" class="navbar navbar-expand navbar-light fixed-top">
+      expect(navBarView.create(mockSession)).toEqual(`<nav id="nav-bar" class="navbar navbar-expand navbar-light fixed-top">
           <div class="container">
               <ul class="navbar-nav left-links">
                 <li class="nav-item active-link-item"><a class="nav-link active-link" href="#peeps">Home</a></li>
