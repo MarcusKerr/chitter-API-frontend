@@ -1,9 +1,10 @@
 (function (exports) {
-  function PeepsController (client, peep = new Peep(client), peepsList = new PeepsList(client), peepsListView = new PeepsListView(peepsList), singlePeepView = SinglePeepView) {
+  function PeepsController (client, peep = new Peep(client), peepsList = new PeepsList(client), peepsListView = new PeepsListView(peepsList), singlePeepView = SinglePeepView, composePeepView = new ComposePeepView()) {
     this._peep = peep;
     this._peepsList = peepsList;
     this._peepsListView = peepsListView;
     this._singlePeepView = singlePeepView;
+    this._composePeepView = composePeepView;
   };
 
   PeepsController.prototype.renderPeepsList = function (navBarHtml) {
@@ -30,6 +31,10 @@
             return peep.id === peepId;
           }));
         });
+  };
+
+  PeepsController.prototype.renderComposePeepView = function() {
+    return this._composePeepView.create();
   };
 
   PeepsController.prototype.newPeep = function (id, body, sessionKey) {
