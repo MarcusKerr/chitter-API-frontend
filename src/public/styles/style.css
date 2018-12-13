@@ -197,11 +197,11 @@ body {
 
 /* Compose peep modal */
 
-#peepModalTitle {
+#composePeepModalTitle {
   margin: 0 auto;
 }
 
-#peepModal .modal-body {
+#composePeepModal .modal-body {
   background-color: #ffe2dd;
   padding-bottom: 1px;
 }
@@ -212,7 +212,7 @@ body {
   border-radius: .5rem;
 }
 
-#peepModal .modal-footer {
+#composePeepModal .modal-footer {
   border-top: none;
   border-bottom-left-radius: .3rem;
   border-bottom-right-radius: .3rem;

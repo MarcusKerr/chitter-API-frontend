@@ -1,7 +1,7 @@
 (function(exports){
-  function Router(client = new Client, indexView = new IndexView(), loginView = new LoginView(), signupView = new signUpView(), navBarView = NavBarView(), errorMessageView = ErrorMessageView(), peepsController = new PeepsController(client), usersController = new UsersController(client), sessionsController = new SessionsController(client)) {
+  function Router(client = new Client, indexView = new IndexView(), logInView = new LogInView(), signUpView = new SignUpView(), navBarView = NavBarView, errorMessageView = ErrorMessageView(), peepsController = new PeepsController(client), usersController = new UsersController(client), sessionsController = new SessionsController(client)) {
     this.indexView = indexView;
-    this.loginView = loginView;
+    this.logInView = logInView;
     this.signUpView = signUpView;
     this.navBarView = navBarView;
     this.errorMessageView = errorMessageView
@@ -10,8 +10,8 @@
     this.sessionsController = sessionsController;
     this.routes = {
       '': [ indexView.create(), setIndexButtons ],
-      '#login': [ loginView.renderLogIn(), setFormButton ],
-      '#signup': [ signupView.renderSignUp(), setFormButton ]
+      '#login': [ logInView.create(), setFormButton ],
+      '#signup': [ signUpView.create(), setFormButton ]
     };
   };
 
@@ -27,7 +27,7 @@
   };
 
   Router.prototype._getPeepsList = function () {
-    return this.peepsController.renderPeepsList(new this.navBarView().renderNavBar(this._isInSession()))
+    return this.peepsController.renderPeepsList(new this.navBarView().create(this._isInSession()))
   };
 
   Router.prototype.displayError = function (errorMsg) {

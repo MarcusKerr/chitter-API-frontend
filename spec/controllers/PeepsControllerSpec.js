@@ -7,7 +7,7 @@ describe("PeepController", function() {
   var mockPeepsList;
   var mockPeepsListView;
   var mockSinglePeepView;
-  // var mockComposePeepView;
+  var mockComposePeepView;
   var mockNavBarHtml = '<div></div>';
   var peepId = 175;
   var peepModal = null;
@@ -26,8 +26,8 @@ describe("PeepController", function() {
     mockSinglePeepView.create.and.callFake(function() {
       return Promise.resolve('<div><p>Single Peep</p></div>')
     });
-    // mockComposePeepView = jasmine.createSpyObj('mockComposePeepView', ['create']);
-    peepsController = new PeepsController(mockClient, mockPeep, mockPeepsList, mockPeepsListView, mockSinglePeepView);
+    mockComposePeepView = jasmine.createSpyObj('mockComposePeepView', ['create']);
+    peepsController = new PeepsController(mockClient, mockPeep, mockPeepsList, mockPeepsListView, mockSinglePeepView, mockComposePeepView);
   });
 
   describe(".newPeep", function() {
@@ -41,6 +41,13 @@ describe("PeepController", function() {
     it("delegates to peepListview", function() {
       peepsController.renderPeepsList(mockNavBarHtml);
       expect(mockPeepsListView.create).toHaveBeenCalledWith(mockNavBarHtml);
+    });
+  });
+
+  describe(".renderComposePeepView", function() {
+    it("delegates to composePeepView", function() {
+      peepsController.renderComposePeepView();
+      expect(mockComposePeepView.create).toHaveBeenCalled();
     });
   });
 
