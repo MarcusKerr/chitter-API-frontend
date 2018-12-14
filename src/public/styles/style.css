@@ -210,6 +210,7 @@ body {
   height: 85px;
   border: 2px solid #ffa99a;
   border-radius: .5rem;
+  resize: none;
 }
 
 #composePeepModal .modal-footer {

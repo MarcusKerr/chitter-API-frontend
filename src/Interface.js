@@ -13,11 +13,12 @@ updatePage();
 
 function updatePage () {
   if (currentHash.includes("#peeps")) {
-    pageContent[0]
+    return pageContent[0]
     .then(peepListHtml => app.innerHTML = peepListHtml )
     .then(res => {
       if(hashIsPeepId()) return pageContent[1].then(singlePeepHtml => callCallback(pageContent[2], singlePeepHtml));
-      callCallback(pageContent[1], pageContent[2])
+      callCallback(pageContent[1], pageContent[2]);
+      if(currentHash === "#peeps/new") return callCallback(pageContent[3]);
     })
   } else {
     app.innerHTML = pageContent[0];
@@ -123,17 +124,13 @@ function showModal (modalHtml) {
 function closeModal() {
   $('.modal').on('hidden.bs.modal', function () {
     if (document.getElementById('errorMsgModal')) { 
-      var hash = getUrlHash();
+      var hash = currentHash.split('#')[1];
       updateUrl('')
       updateUrl(hash);
     } else {
       history.go(-1)
     }
   });
-};
-
-function getUrlHash () {
-  return currentHash.split('#')[1]
 };
 
 function logInUser(handle, password) {
@@ -158,4 +155,17 @@ function setNavBarButtons(inSession) {
       router.logout();
     });
   };
+};
+
+function setNewPeepButton () {
+  var peepButton = document.getElementById("composePeep")
+  var peepTextArea = document.getElementById("peepTextArea")
+  peepButton.disabled = true;
+  peepTextArea.addEventListener("input", function(){
+    peepTextArea.value === "" ? peepButton.disabled = true : peepButton.disabled = false
+  });
+  
+  peepButton.addEventListener("click", function(){
+    router.newPeep();
+  });
 };

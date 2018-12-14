@@ -1,5 +1,5 @@
 (function(exports){
-  function Router(client = new Client, indexView = new IndexView(), logInView = new LogInView(), signUpView = new SignUpView(), navBarView = new NavBarView(), errorMessageView = ErrorMessageView(), peepsController = new PeepsController(client), usersController = new UsersController(client), sessionsController = new SessionsController(client)) {
+  function Router(client = new Client, indexView = new IndexView(), logInView = new LogInView(), signUpView = new SignUpView(), navBarView = new NavBarView(), errorMessageView = new ErrorMessageView(), peepsController = new PeepsController(client), usersController = new UsersController(client), sessionsController = new SessionsController(client)) {
     this.indexView = indexView;
     this.logInView = logInView;
     this.signUpView = signUpView;
@@ -19,7 +19,10 @@
     if (this._isSigningInOrUp(hash) && this._isInSession()) return this._redirect('peeps');
     if (hash.includes('#peeps')) {
       if (this._isPeepId(hash)) return [ this._getPeepsList(), this._getSinglePeep(parseInt(hash.split('/')[1])), showModal];
-      if (hash === '#peeps/new') return [ this._getPeepsList(), showModal, this.peepsController.renderComposePeepView()];
+      if (hash === '#peeps/new') {
+        if(!this._isInSession()) return this._redirect("peeps");
+        return [ this._getPeepsList(), showModal, this.peepsController.renderComposePeepView(), setNewPeepButton];
+      } 
       return [ this._getPeepsList(), setNavBarButtons, this._isInSession() ]
     } 
     return this.routes[hash];
@@ -38,7 +41,7 @@
   };
 
   Router.prototype.displayError = function (errorMsg) {
-    return new this.errorMessageView.renderErrorMessage (errorMsg);
+    return this.errorMessageView.create(errorMsg);
   };
 
   Router.prototype._getNavbar = function () {
