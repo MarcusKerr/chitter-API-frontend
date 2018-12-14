@@ -3,6 +3,10 @@
     this._session = session;
   };
 
+  SessionsController.prototype.getSession = function () {
+    return this._session.getSession();
+  };
+
   SessionsController.prototype.isInSession = function () {
     return this._session.isInSession();
   };
