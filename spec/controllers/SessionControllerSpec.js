@@ -9,8 +9,15 @@ describe("SessionsController", function(){
   var mockSessionModel;
 
   beforeEach(function(){
-    mockSessionModel = jasmine.createSpyObj('mockSessionModel', ['isInSession', 'startSession', 'end']);
+    mockSessionModel = jasmine.createSpyObj('mockSessionModel', ['getSession', 'isInSession', 'startSession', 'end']);
     sessionsController = new SessionsController(mockClient, mockSessionModel)
+  });
+
+  describe(".getSession", function() {
+    it("delegates to the session model", function(){
+      sessionsController.getSession();
+      expect(mockSessionModel.getSession).toHaveBeenCalled();
+    });
   });
 
   describe(".isInSession", function() {

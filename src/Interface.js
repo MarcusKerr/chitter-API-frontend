@@ -164,8 +164,8 @@ function setNewPeepButton () {
   peepTextArea.addEventListener("input", function(){
     peepTextArea.value === "" ? peepButton.disabled = true : peepButton.disabled = false
   });
-  
+
   peepButton.addEventListener("click", function(){
-    router.newPeep();
+    router.createPeep(peepTextArea.value);
   });
 };

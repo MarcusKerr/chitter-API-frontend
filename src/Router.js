@@ -72,6 +72,10 @@
       });
   };
 
+  Router.prototype.createPeep = function (peepBody) {
+    this.peepsController.newPeep(this.sessionsController.getSession()['user_id'], peepBody, this.sessionsController.getSession()['session_key']);
+  };
+
   Router.prototype._startSession = function (handle, password) {
     this.sessionsController.startSession(handle, password).then(res => this._redirect('peeps'));
   };
