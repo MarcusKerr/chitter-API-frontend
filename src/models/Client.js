@@ -15,11 +15,11 @@
 
   Client.prototype.post = function(path, data, sessionKey = null) {
     var headers = new Headers({"Content-Type": "application/json"});
+    console.log(data)
     if (path === '/peeps') {
       headers.append("Authorization", `Token token=${sessionKey}`);
-      headers.append("credentials", "include");
     }
-    // console.log(headers.get("Authorization"))
+    console.log(headers.get("Authorization"))
     return fetch(this._url + path, {
       method: 'POST',
       body: JSON.stringify(data),

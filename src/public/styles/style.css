@@ -47,7 +47,7 @@ body {
 #confirm-sign-up-btn:hover,
 #confirm-log-in-btn:hover,
 #peep-btn:hover,
-#composePeep:hover {
+#composePeep:enabled:hover {
   background-color:#d0513a;	
 }
 
@@ -204,6 +204,7 @@ body {
 #composePeepModal .modal-body {
   background-color: #ffe2dd;
   padding-bottom: 1px;
+  border-top: 1px solid #ffa99a;
 }
 
 #peepTextArea {
