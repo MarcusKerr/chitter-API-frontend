@@ -3,32 +3,28 @@ describe("UserController", function() {
   var UsersController = require("../../src/controllers/UsersController").UsersController;
   var usersController;
   var mockUser;
-  var mockLocalStorage
-  var handle = "Marcus";
-  var password = "124";
+  var mockClient
+  var handle = "marcus";
+  var password = "mypassword";
 
   beforeEach(function() {
+    mockClient = jasmine.createSpy("mockClient");
     mockUser = jasmine.createSpyObj("mockUser", ['new', 'login']);
-    mockLocalStorage = jasmine.createSpyObj("mockLocalStorage", ['setItem']);
-    usersController = new UsersController(mockUser, mockLocalStorage);
-  })
-
-  describe(".createNewUser", function() {
-    
+    usersController = new UsersController(mockClient, mockUser);
   });
 
-  // describe(".login", function() {
-  //   it("delegates to the user model", function(){
-  //     usersController.loginUser(handle, password);
-  //     expect(mockUser.login).toHaveBeenCalledWith(handle, password);
-  //   });
+  // describe(".createNewUser", function() {
+  //   it("delegates to user model", function() {
+  //     usersController.createNewUser(handle, password)
+  //     expect(mockUser.new).toHaveBeenCalledWith(handle, password);
+  //     // expect(mockUser.login).toHaveBeenCalledWith(handle,password);
+  //   })
+  //   // delegates to user model new
+  //   // pdelegates to use model login
   // });
 
-  // describe(".logOut", function() {
-  //   it("clears session data", function() {
-  //     usersController.logInUser(handle, password);
-  //     usersController.logOut();
-  //     expect(usersController.session).toEqual('');
-  //   });
+  // describe(".loginUser", function() {
+  //   //delegats to user login
+  //   // returns respons 
   // });
 });

@@ -7,6 +7,10 @@
     this._composePeepView = composePeepView;
   };
 
+  PeepsController.prototype.newPeep = function (id, body, sessionKey) {
+    return this._peep.new(id, body, sessionKey);
+  };
+
   PeepsController.prototype.renderPeepsList = function (navBarHtml) {
     return this._peepsListView.create(navBarHtml)
       .then(peepsHtml => {
@@ -35,10 +39,6 @@
 
   PeepsController.prototype.renderComposePeepView = function() {
     return this._composePeepView.create();
-  };
-
-  PeepsController.prototype.newPeep = function (id, body, sessionKey) {
-    return this._peep.new(id, body, sessionKey);
   };
 
   exports.PeepsController = PeepsController;

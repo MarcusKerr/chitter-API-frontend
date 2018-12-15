@@ -128,7 +128,7 @@ function closeModal() {
       updateUrl('')
       updateUrl(hash);
     } else {
-      history.go(-1)
+      updateUrl('peeps');
     }
   });
 };
@@ -167,5 +167,7 @@ function setNewPeepButton () {
 
   peepButton.addEventListener("click", function(){
     router.createPeep(peepTextArea.value);
+    closeModal();
+    $('.modal').modal('hide');
   });
 };

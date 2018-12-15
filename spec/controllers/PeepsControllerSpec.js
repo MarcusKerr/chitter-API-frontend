@@ -9,8 +9,9 @@ describe("PeepController", function() {
   var mockSinglePeepView;
   var mockComposePeepView;
   var mockNavBarHtml = '<div></div>';
-  var peepId = 175;
-  var peepModal = null;
+  var mockPeepId = 1;
+  var mockPeepBody = 175;
+  var mockSessionKey = "a_valid_session_key";
 
   beforeEach(function() {
     mockClient = jasmine.createSpyObj('mockClient', ['connect']);
@@ -32,8 +33,8 @@ describe("PeepController", function() {
 
   describe(".newPeep", function() {
     it("delegats to the peep model", function() {
-      peepsController.newPeep();
-      expect(mockPeep.new).toHaveBeenCalled();
+      peepsController.newPeep(mockPeepId, mockPeepBody, mockSessionKey);
+      expect(mockPeep.new).toHaveBeenCalledWith(mockPeepId, mockPeepBody, mockSessionKey);
     });
   });
 
