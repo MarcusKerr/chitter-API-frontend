@@ -37,7 +37,7 @@
     var hours = peepDateTime.getHours();
     var mins = peepDateTime.getMinutes();
     if (mins < 10) {
-      mins = "0" + mins;
+      mins = `0${mins}`;
     }
     var ampm = "AM";
     if (hours > 12) {

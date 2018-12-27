@@ -2,26 +2,22 @@
   "name": "chitter-api-frontend",
   "version": "1.0.0",
   "description": "Twitter clone",
-  "main": "index.js",
+  "main": "interface.js",
   "directories": {
     "lib": "lib"
   },
-  "dependencies": {
-    "http-server": "^0.11.1"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "chai": "^4.2.0",
-    "eslint": "^5.10.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
     "http-server": "^0.11.1",
-    "jasmine": "^3.3.1",
-    "jasmine-node": "^2.0.1",
-    "webdriverio": "^4.14.1"
+    "jasmine": "^3.3.1"
   },
   "scripts": {
     "test": "jasmine"
   },
   "author": "Marcus A. Kerr",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarcusKerr/chitter-API-frontend.git"
+  }
 }
